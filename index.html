@@ -1,12 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PM Carousel</title>
+    <link rel="stylesheet" href="./style.scss">
+    <title>PM Carousel - documentation</title>
   </head>
-  <body>
-    <script type="module" src="/main.js"></script>
+  <body class="helvetica h-100">
+    <div class="mw8 center flex flex-column h-100">
+      <header class="pa2 pa4-ns bg-dark-blue flex-ns items-center justify-between">
+        <h1 class="white ma0">PM-Carousel</h1>
+        <p class="lightest-blue">
+          Full documentation on <a class="b link no-underline underline-hover pink" href="https://github.com/lordfpx/pm-carousel">GitHub</a>
+        </p>
+      </header>
+
+      <main>
+        <div class="pa2 pa4-ns bg-lightest-blue">
+          <p>PM-Carousel, for "Pimp My Carousel" is a pretty <strong>small</strong>, <strong>accessible</strong> and <strong>vanilla JavaScript</strong> to manage your carousels. It is dependency free!</p>
+        </div>
+
+        <div class="demo-wrapper pa2 pa4-ns">
+          <h2 class="dark-pink">Responsive example</h2>
+
+          <div data-pm-carousel>
+            <!--
+              Play/pause :
+              freely personalize DOM but keep {text}
+              and data-pm-carousel-playstop attribute
+            -->
+            <button
+              type="button"
+              data-pm-carousel-playstop="Stop the carousel|Play the carousel"
+            >
+              <b>{text}</b>
+            </button>
+
+            <!--
+              navigation dots :
+              freely personalize DOM but keep {nbr}
+              and data-pm-carousel-paging attribute
+            -->
+            <ul data-pm-carousel-paging>
+              <li>
+                <button type="button"><b>Slide {nbr}</b></button>
+              </li>
+            </ul>
+
+            <!-- Carousel-->
+            <div data-pm-carousel-wrapper>
+              <div data-pm-carousel-overflow>
+                <div data-pm-carousel-item>
+                  <h2>Fashion news</h2>
+                  <p>Content of panel 1</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fragrance news</h2>
+                  <p>Content of panel 2</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Beauty news</h2>
+                  <p>Content of panel 3</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fashion news</h2>
+                  <p>Content of panel 4</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fragrance news</h2>
+                  <p>Content of panel 5</p>
+                </div>
+              </div>
+            </div>
+
+            <!--
+              Prev/next :
+              freely personalize DOM but keep {text}
+              and data-pm-carousel-prev and data-pm-carousel-next attributes
+            -->
+            <button
+              data-pm-carousel-prev="Previous item|Go back to last item"
+              type="button"
+            >
+              <b>{text}</b>
+            </button>
+            <button
+              data-pm-carousel-next="Next item|Go back to first item"
+              type="button"
+            >
+              <b>{text}</b>
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <footer class="pa2 pa4-ns bg-dark-blue">
+        <p class="lightest-blue tc">
+          © 2020, Thierry Philippe (<a class="b link pink no-underline underline-hover" href="https://twitter.com/lordfpx">@lordfpx</a>)
+        </p>
+      </footer>
+    </div>
+
+    <script type="module" src="./script.js"></script>
   </body>
 </html>

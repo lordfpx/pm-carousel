@@ -1,4 +1,4 @@
-import pmCarousel from "../main.js"
+import pmCarousel from "./main.js"
 
 pmCarousel({
   config: {
