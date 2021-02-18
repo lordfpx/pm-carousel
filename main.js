@@ -1,10 +1,12 @@
-import CONST from "./src/CONST.js";
-import utils from "./src/utils.js";
-import _init from "./src/_init.js";
-import _setActive from "./src/_setActive.js";
-import _build from "./src/_build.js";
-import disable from "./src/disable.js";
-import reset from "./src/reset.js";
+import CONST from "./src/CONST";
+import utils from "./src/utils";
+
+import init from "./src/init";
+import setActive from "./src/setActive";
+import onClick from "./src/onClick";
+import onMatchMedia from "./src/onMatchMedia";
+import getMqConfig from "./src/getMqConfig";
+import touch from "./src/touch";
 
 const DEFAULT = {
   config: {
@@ -26,55 +28,29 @@ class Plugin {
     // merged settings
     this.settings = utils.extend(true, DEFAULT, settings, elSettings);
 
-    this.nodes = {
-      paging: this.el.querySelector(`[${CONST.attrPaging}]`),
-      wrapper: this.el.querySelector(`[${CONST.attrWrapper}]`),
-      overflow: this.el.querySelector(`[${CONST.attrOverflow}]`),
-      items: [].slice.call(this.el.querySelectorAll(`[${CONST.attrItem}]`)),
-      prev: this.el.querySelector(`[${CONST.attrPrev}]`),
-      next: this.el.querySelector(`[${CONST.attrNext}]`),
-      playstop: this.el.querySelector(`[${CONST.attrPlaystop}]`),
-    };
+    this.el.addEventListener("click", onClick.bind(this));
 
-    // to allow reset
-    this.clonedItems = [...this.nodes.items];
+    // carousel config
+    this.config = this.settings.config;
 
-    // pseudo templates
-    this.pagingBtnString = this.nodes.paging.children[0].outerHTML;
-    this.playstopString = this.nodes.playstop.children[0].outerHTML;
-    this.prevString = this.nodes.prev.children[0].outerHTML;
-    this.nextString = this.nodes.next.children[0].outerHTML;
+    this.clonedChildren = this.el.innerHTML;
 
-    const playstopTexts = this.nodes.playstop.getAttribute(CONST.attrPlaystop).split("|");
-    const prevTexts = this.nodes.prev.getAttribute(CONST.attrPrev).split("|");
-    const nextTexts = this.nodes.next.getAttribute(CONST.attrNext).split("|");
-    this.texts = {
-      stop: playstopTexts[0],
-      play: playstopTexts[1],
-      prev: prevTexts[0],
-      prevFirst: prevTexts[1],
-      next: nextTexts[0],
-      nextLast: nextTexts[1],
-    };
+    // media query carousel config
+    if (this.settings.responsive) {
+      this.config = getMqConfig.call(this);
+      this.settings.responsive.forEach(config => {
+        let mql = window.matchMedia(`(min-width: ${config.width})`);
+        mql.addEventListener("change", onMatchMedia.bind(this));
+      });
+    }
 
-    this.active = 0;
-    this._interval = null;
-    this.autoplayStatus = "stop"; // to manage play/stop
-
-    // touch
-    this._slideWidth = 0;
-    this._touchstartX = 0;
-    this._touchmoveX = 0;
-    this._moveX = 0;
-
-    _init.call(this);
+    if (!this.config.disable) {
+      init.call(this);
+    }
   }
 
   refresh() {
-    reset.resetSlides.call(this);
-    _build.call(this, ["paging"]);
-    this.active = 0;
-    _setActive.call(this);
+    init.call(this)
   }
 
   play() {
@@ -130,15 +106,24 @@ class Plugin {
     if (this.active > this.slideLength - 1)
       this.active = this.config.loop ? 0 : this.slideLength - 1;
 
-    _setActive.call(this);
+    setActive.call(this);
+  }
+
+  disable() {
+    this.nodes.wrapper.removeEventListener("touchstart", touch.onTouchStart.bind(this));
+    this.nodes.wrapper.removeEventListener("touchmove", touch.onTouchMove.bind(this));
+    this.nodes.wrapper.removeEventListener("touchend", touch.onTouchEnd.bind(this));
+    this.el.removeEventListener("mouseenter", this.pause.bind(this));
+    this.el.removeEventListener("mouseleave", this.play.bind(this));
+
+    this.el.innerHTML = this.clonedChildren;
+    this.el.classList.remove(CONST.activeClass);
   }
 }
 
-Plugin.prototype.disable = disable;
-
 const pmCarousel = function (settings = {}) {
   const elements = document.querySelectorAll(`[${CONST.attr}]`);
-  elements.forEach(node => (node[CONST.pluginName] = new Plugin(node, settings)));
+  elements.forEach(node => (node.pmCarousel = new Plugin(node, settings)));
 };
 
 export default pmCarousel

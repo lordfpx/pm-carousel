@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "build": "vite build && vite preview",
+    "preversion": "vite build --base=/pm-carousel/ && git add .",
+    "postversion": "git push && git push --tags"
   },
   "devDependencies": {
     "sass": "^1.32.7",

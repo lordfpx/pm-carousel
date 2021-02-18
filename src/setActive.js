@@ -1,9 +1,9 @@
-import CONST from "./CONST.js";
-import _updateScroll from "./_updateScroll.js";
-import _prevBtn from "./_prevBtn.js";
-import _nextBtn from "./_nextBtn.js";
+import CONST from "./CONST";
+import updateScroll from "./updateScroll";
+import prevBtn from "./prevBtn";
+import nextBtn from "./nextBtn";
 
-function _setActive() {
+function setActive() {
   this.activeSlides = [];
 
   // Le nbr de page est différent du nbr de slides !
@@ -34,9 +34,9 @@ function _setActive() {
     });
   });
 
-  _updateScroll.call(this);
-  _prevBtn.call(this);
-  _nextBtn.call(this);
+  updateScroll.call(this);
+  prevBtn.call(this);
+  nextBtn.call(this);
 }
 
-export default _setActive;
+export default setActive;

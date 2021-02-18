@@ -1,4 +1,4 @@
-function _nextBtn() {
+function nextBtn() {
   if (!this.nodes.next) return;
 
   const nextText = this.nextString;
@@ -10,4 +10,4 @@ function _nextBtn() {
   this.config.loop ? (this.nodes.next.hidden = false) : (this.nodes.next.hidden = this.active === this.slideLength - 1);
 }
 
-export default _nextBtn;
+export default nextBtn;

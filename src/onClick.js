@@ -1,6 +1,6 @@
-import CONST from "./CONST.js";
+import CONST from "./CONST";
 
-function _onClick(ev) {
+function onClick(ev) {
   let newActive = this.active;
   let targetNode = ev.target;
 
@@ -24,4 +24,4 @@ function _onClick(ev) {
   this.changeActive(newActive);
 }
 
-export default _onClick;
+export default onClick;

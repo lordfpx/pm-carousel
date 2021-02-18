@@ -1,4 +1,4 @@
-import CONST from "./CONST.js";
+import CONST from "./CONST";
 
 const buildActions = {
   buttons: function () {
@@ -69,8 +69,8 @@ const buildActions = {
   },
 };
 
-function _build(actions = []) {
+function build(actions = []) {
   actions.forEach(action => buildActions[action].call(this));
 }
 
-export default _build;
+export default build;

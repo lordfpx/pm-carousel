@@ -1,4 +1,4 @@
-function _prevBtn() {
+function prevBtn() {
   if (!this.nodes.prev) return;
 
   const prevText = this.prevString;
@@ -7,4 +7,4 @@ function _prevBtn() {
   this.config.loop ? (this.nodes.prev.hidden = false) : (this.nodes.prev.hidden = this.active === 0);
 }
 
-export default _prevBtn;
+export default prevBtn;

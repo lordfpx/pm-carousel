@@ -1,6 +1,6 @@
-import CONST from "./CONST.js";
+import CONST from "./CONST";
 
-function resetSlides() {
+function slides() {
   const newSlides = [];
 
   this.nodes.items = [...this.clonedItems];
@@ -22,4 +22,4 @@ function resetSlides() {
   this.slideLength = this.nodes.items.length;
 }
 
-export default { resetSlides };
+export default { slides };

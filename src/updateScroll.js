@@ -1,4 +1,4 @@
-function _updateScroll() {
+function updateScroll() {
   this._slideWidth = this.activeSlides[0].offsetWidth * this.config.group;
   this._distance = this.active * this._slideWidth;
 
@@ -14,4 +14,4 @@ function _updateScroll() {
   this.nodes.overflow.style.transform = `translateX(${-this._distance}px`;
 }
 
-export default _updateScroll;
+export default updateScroll;

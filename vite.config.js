@@ -5,5 +5,4 @@ module.exports = {
   build: {
     outDir: "docs",
   },
-  base: "/pm-carousel/"
 }

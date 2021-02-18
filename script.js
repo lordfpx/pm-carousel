@@ -1,21 +1,21 @@
-import pmCarousel from "./main.js"
+import pmCarousel from "./main"
 
 pmCarousel({
   config: {
-    loop: true,
-    group: 2,
-    autoplay: false
+    group: 1,
   },
   responsive: [
     {
-      mq: "screen and (max-width: 480px)",
-      group: 1,
-      autoplay: false,
-      loop: false
+      width: "400px",
+      group: 2,
     },
     {
-      mq: "screen and (max-width: 600px)",
-      disable: true
-    }
+      width: "600px",
+      disable: true,
+    },
+    {
+      width: "800px",
+      group: 4,
+    },
   ]
 });
