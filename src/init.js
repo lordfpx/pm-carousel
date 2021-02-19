@@ -1,5 +1,4 @@
 import CONST from "./CONST";
-import touch from "./touch";
 import build from "./build";
 
 function init() {
@@ -13,24 +12,6 @@ function init() {
     playstop: this.el.querySelector(`[${CONST.attrPlaystop}]`),
   };
 
-  // pseudo templates
-  this.pagingBtnString = this.nodes.paging.children[0].outerHTML;
-  this.playstopString = this.nodes.playstop.children[0].outerHTML;
-  this.prevString = this.nodes.prev.children[0].outerHTML;
-  this.nextString = this.nodes.next.children[0].outerHTML;
-
-  const playstopTexts = this.nodes.playstop.getAttribute(CONST.attrPlaystop).split("|");
-  const prevTexts = this.nodes.prev.getAttribute(CONST.attrPrev).split("|");
-  const nextTexts = this.nodes.next.getAttribute(CONST.attrNext).split("|");
-  this.texts = {
-    stop: playstopTexts[0],
-    play: playstopTexts[1],
-    prev: prevTexts[0],
-    prevFirst: prevTexts[1],
-    next: nextTexts[0],
-    nextLast: nextTexts[1],
-  };
-
   this.active = 0;
   this._interval = null;
   this.autoplayStatus = "stop"; // to manage play/stop
@@ -41,11 +22,13 @@ function init() {
   this._touchmoveX = 0;
   this._moveX = 0;
 
-  build.call(this, ["slides", "wrappers", "buttons", "paging"]);
+  build.call(this, ["slides", "wrappers", "playstop", "paging"]);
 
-  this.nodes.wrapper.addEventListener("touchstart", touch.onTouchStart.bind(this));
-  this.nodes.wrapper.addEventListener("touchmove", touch.onTouchMove.bind(this));
-  this.nodes.wrapper.addEventListener("touchend", touch.onTouchEnd.bind(this));
+  this.el.addEventListener("click", this.onClick);
+
+  this.nodes.wrapper.addEventListener("touchstart", this.onTouchStart);
+  this.nodes.wrapper.addEventListener("touchmove", this.onTouchMove);
+  this.nodes.wrapper.addEventListener("touchend", this.onTouchEnd);
 
   if (this.config.autoplay) {
     // can't autoplay without loop

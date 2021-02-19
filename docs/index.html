@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <title>PM Carousel - documentation</title>
-  <script type="module" crossorigin src="/pm-carousel/assets/index.119f2fe8.js"></script>
-  <link rel="stylesheet" href="/pm-carousel/assets/index.2066f5a8.css">
+  <script type="module" crossorigin src="/assets/index.f4330ba5.js"></script>
+  <link rel="stylesheet" href="/assets/index.2066f5a8.css">
 </head>
   <body class="helvetica h-100">
     <div class="mw8 center flex flex-column h-100">
@@ -35,6 +35,7 @@
             <button
               type="button"
               data-pm-carousel-playstop="Stop the carousel|Play the carousel"
+              hidden
             >
               <b>{text}</b>
             </button>
@@ -44,7 +45,7 @@
               freely personalize DOM but keep {nbr}
               and data-pm-carousel-paging attribute
             -->
-            <ul data-pm-carousel-paging>
+            <ul data-pm-carousel-paging hidden>
               <li>
                 <button type="button"><b>Slide {nbr}</b></button>
               </li>
@@ -64,6 +65,10 @@
                 <div data-pm-carousel-item>
                   <h2>Beauty news</h2>
                   <p>Content of panel 3</p>
+                  <button type="button" data-demo-toggle="#target-1">click</button>
+                  <div hidden id="target-1">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi hic aut iure id quae corrupti, nesciunt quaerat enim illo sit et cupiditate, consequuntur veritatis cumque, dolore aspernatur explicabo deleniti at.</p>
+                  </div>
                 </div>
                 <div data-pm-carousel-item>
                   <h2>Fashion news</h2>
@@ -84,17 +89,19 @@
             <button
               data-pm-carousel-prev="Previous item|Go back to last item"
               type="button"
+              hidden
             >
               <b>{text}</b>
             </button>
             <button
               data-pm-carousel-next="Next item|Go back to first item"
               type="button"
+              hidden
             >
               <b>{text}</b>
             </button>
           </div>
-        </div>
+        </div>z
       </main>
 
       <footer class="pa2 pa4-ns bg-dark-blue">

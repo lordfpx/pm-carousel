@@ -4,9 +4,9 @@ import utils from "./src/utils";
 import init from "./src/init";
 import setActive from "./src/setActive";
 import onClick from "./src/onClick";
+import onTouch from "./src/onTouch";
 import onMatchMedia from "./src/onMatchMedia";
 import getMqConfig from "./src/getMqConfig";
-import touch from "./src/touch";
 
 const DEFAULT = {
   config: {
@@ -28,12 +28,41 @@ class Plugin {
     // merged settings
     this.settings = utils.extend(true, DEFAULT, settings, elSettings);
 
-    this.el.addEventListener("click", onClick.bind(this));
-
     // carousel config
     this.config = this.settings.config;
 
     this.clonedChildren = this.el.innerHTML;
+
+    this.onClick = onClick.bind(this);
+    this.onTouchstart = onTouch.onTouchStart.bind(this);
+    this.onTouchMove = onTouch.onTouchMove.bind(this);
+    this.onTouchEnd = onTouch.onTouchEnd.bind(this);
+
+    // pseudo templates
+    this.nodes = {
+      paging: this.el.querySelector(`[${CONST.attrPaging}]`),
+      prev: this.el.querySelector(`[${CONST.attrPrev}]`),
+      next: this.el.querySelector(`[${CONST.attrNext}]`),
+      playstop: this.el.querySelector(`[${CONST.attrPlaystop}]`),
+    };
+
+    this.pagingBtnString = this.nodes.paging.children[0].outerHTML;
+    this.playstopString = this.nodes.playstop.children[0].outerHTML;
+    this.prevString = this.nodes.prev.children[0].outerHTML;
+    this.nextString = this.nodes.next.children[0].outerHTML;
+
+    // Labels
+    const playstopTexts = this.nodes.playstop.getAttribute(CONST.attrPlaystop).split("|");
+    const prevTexts = this.nodes.prev.getAttribute(CONST.attrPrev).split("|");
+    const nextTexts = this.nodes.next.getAttribute(CONST.attrNext).split("|");
+    this.texts = {
+      stop: playstopTexts[0],
+      play: playstopTexts[1],
+      prev: prevTexts[0],
+      prevFirst: prevTexts[1],
+      next: nextTexts[0],
+      nextLast: nextTexts[1],
+    };
 
     // media query carousel config
     if (this.settings.responsive) {
@@ -110,13 +139,22 @@ class Plugin {
   }
 
   disable() {
-    this.nodes.wrapper.removeEventListener("touchstart", touch.onTouchStart.bind(this));
-    this.nodes.wrapper.removeEventListener("touchmove", touch.onTouchMove.bind(this));
-    this.nodes.wrapper.removeEventListener("touchend", touch.onTouchEnd.bind(this));
-    this.el.removeEventListener("mouseenter", this.pause.bind(this));
-    this.el.removeEventListener("mouseleave", this.play.bind(this));
+    this.stop();
 
-    this.el.innerHTML = this.clonedChildren;
+    this.nodes.wrapper.removeEventListener("touchstart", this.onTouchStart);
+    this.nodes.wrapper.removeEventListener("touchmove", this.onTouchMove);
+    this.nodes.wrapper.removeEventListener("touchend", this.onTouchEnd);
+    this.el.removeEventListener("click", this.onClick);
+    this.el.removeEventListener("mouseenter", this.pause);
+    this.el.removeEventListener("mouseleave", this.play);
+
+    this.nodes.paging.hidden = true;
+    this.nodes.prev.hidden = true;
+    this.nodes.next.hidden = true;
+    this.nodes.playstop.hidden = true;
+
+    this.nodes.overflow.removeAttribute("style")
+
     this.el.classList.remove(CONST.activeClass);
   }
 }

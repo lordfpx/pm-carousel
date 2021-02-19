@@ -1,7 +1,7 @@
 import CONST from "./CONST";
 
 const buildActions = {
-  buttons: function () {
+  playstop: function () {
     // play/stop
     this.nodes.playstop.hidden = this.config.autoplay ? false : true;
   },
@@ -60,12 +60,13 @@ const buildActions = {
     this.nodes.items.forEach((node, index) => {
       btnString = this.pagingBtnString;
       newPage = document.createElement("div");
-      newPage.innerHTML = btnString.replace("{nbr}", index + 1);
+      newPage.innerHTML = btnString.replace("{nbr}", ++index);
       this.nodes.pages.push(newPage.firstElementChild);
       pages.appendChild(newPage.firstElementChild);
     });
 
     this.nodes.paging.append(pages);
+    this.nodes.paging.hidden = false;
   },
 };
 
