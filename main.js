@@ -9,7 +9,7 @@ import onMatchMedia from "./src/onMatchMedia";
 import getMqConfig from "./src/getMqConfig";
 
 const DEFAULT = {
-  config: {
+  default: {
     loop: true,
     group: 1,
     spaceAround: 0,
@@ -27,9 +27,6 @@ class Plugin {
 
     // merged settings
     this.settings = utils.extend(true, DEFAULT, settings, elSettings);
-
-    // carousel config
-    this.config = this.settings.config;
 
     this.clonedChildren = this.el.innerHTML;
 
@@ -64,11 +61,17 @@ class Plugin {
       nextLast: nextTexts[1],
     };
 
+    // carousel config
+    this.config = this.settings.default;
+
     // media query carousel config
     if (this.settings.responsive) {
+      // order respinsive widths
+      this.settings.responsive.sort((a, b) => parseInt(a.minWidth, 10) - parseInt(b.minWidth, 10))
+
       this.config = getMqConfig.call(this);
       this.settings.responsive.forEach(config => {
-        let mql = window.matchMedia(`(min-width: ${config.width})`);
+        let mql = window.matchMedia(`(min-width: ${config.minWidth})`);
         mql.addEventListener("change", onMatchMedia.bind(this));
       });
     }
@@ -159,9 +162,29 @@ class Plugin {
   }
 }
 
-const pmCarousel = function (settings = {}) {
-  const elements = document.querySelectorAll(`[${CONST.attr}]`);
-  elements.forEach(node => (node.pmCarousel = new Plugin(node, settings)));
+// const pmCarousel = function (settings = {}) {
+//   const elements = document.querySelectorAll(`[${CONST.attr}]`);
+//   elements.forEach(node => {
+//     if (!node.pmCarousel) {
+//       node.pmCarousel = new Plugin(node, settings)
+//     }
+//   });
+// };
+
+const initPmCarousel = (node, settings) => {
+  if (!node.pmCarousel && node.hasAttribute(CONST.attr)) {
+    node.pmCarousel = new Plugin(node, settings)
+  }
+}
+
+const pmCarousel = function (settings = {}, node) {
+  if (node === null) return;
+
+  node = node || document.querySelectorAll(`[${CONST.attr}]`);
+
+  node.length
+    ? node.forEach(node => initPmCarousel(node, settings))
+    : initPmCarousel(node, settings);
 };
 
 export default pmCarousel

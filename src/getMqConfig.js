@@ -1,16 +1,14 @@
-import utils from "./utils";
-
 function getMqConfig() {
   let updatedMqConfig = this.settings.responsive
     .slice()
     .reverse()
     .find(
-      mqConfigs => window.matchMedia(`(min-width: ${mqConfigs.width})`).matches
+      mqConfigs => window.matchMedia(`(min-width: ${mqConfigs.minWidth})`).matches
     );
 
   return updatedMqConfig
-    ? utils.extend(this.settings.config, updatedMqConfig)
-    : this.settings.config;
+    ? {...this.settings.default, ...updatedMqConfig}
+    : this.settings.default;
 }
 
 export default getMqConfig;

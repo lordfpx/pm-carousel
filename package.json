@@ -4,10 +4,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && vite preview",
-    "preversion": "vite build --base=/pm-carousel/ && git add .",
+    "build:main": "vite build --base=/pm-carousel/",
+    "preversion": "npm run build:main && git add .",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
+    "prismjs": "^1.23.0",
     "sass": "^1.32.7",
     "vite": "^2.0.0"
   },
