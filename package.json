@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && vite preview",
-    "build:main": "vite build --base=/pm-carousel/",
+    "build:main": "vite build --base=/pm-carousel/ && vite build -c vite.config.build.js",
     "preversion": "npm run build:main && git add .",
     "postversion": "git push && git push --tags"
   },
@@ -15,5 +15,14 @@
   },
   "dependencies": {
     "tachyons": "^4.12.0"
+  },
+  "files": ["dist"],
+  "main": "./dist/pm-carousel.umd.js",
+  "module": "./dist/pm-carousel.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/pm-carousel.es.js",
+      "require": "./dist/pm-carousel.umd.js"
+    }
   }
 }
