@@ -28,8 +28,22 @@ class Plugin {
     // merged settings
     this.settings = utils.extend(true, DEFAULT, settings, elSettings);
 
-    this.clonedChildren = this.el.innerHTML;
+    // carousel config
+    this.config = this.settings.default;
 
+    // media query carousel config
+    if (this.settings.responsive) {
+      // order respinsive widths
+      this.settings.responsive.sort((a, b) => parseInt(a.minWidth, 10) - parseInt(b.minWidth, 10))
+
+      this.config = getMqConfig.call(this);
+      this.settings.responsive.forEach(config => {
+        let mql = window.matchMedia(`(min-width: ${config.minWidth})`);
+        mql.addEventListener("change", onMatchMedia.bind(this));
+      });
+    }
+
+    // events functions
     this.onClick = onClick.bind(this);
     this.onTouchstart = onTouch.onTouchStart.bind(this);
     this.onTouchMove = onTouch.onTouchMove.bind(this);
@@ -42,7 +56,6 @@ class Plugin {
       next: this.el.querySelector(`[${CONST.attrNext}]`),
       playstop: this.el.querySelector(`[${CONST.attrPlaystop}]`),
     };
-
     this.pagingBtnString = this.nodes.paging.children[0].outerHTML;
     this.playstopString = this.nodes.playstop.children[0].outerHTML;
     this.prevString = this.nodes.prev.children[0].outerHTML;
@@ -61,21 +74,6 @@ class Plugin {
       nextLast: nextTexts[1],
     };
 
-    // carousel config
-    this.config = this.settings.default;
-
-    // media query carousel config
-    if (this.settings.responsive) {
-      // order respinsive widths
-      this.settings.responsive.sort((a, b) => parseInt(a.minWidth, 10) - parseInt(b.minWidth, 10))
-
-      this.config = getMqConfig.call(this);
-      this.settings.responsive.forEach(config => {
-        let mql = window.matchMedia(`(min-width: ${config.minWidth})`);
-        mql.addEventListener("change", onMatchMedia.bind(this));
-      });
-    }
-
     if (!this.config.disable) {
       init.call(this);
     }
@@ -86,7 +84,7 @@ class Plugin {
   }
 
   play() {
-    // stop status !== pause
+    // "stop" status !== pause
     if (this.autoplayStatus === "stop") return;
 
     this.pause(); // clear interval
@@ -101,7 +99,9 @@ class Plugin {
       newActive++;
 
       // must loop even with loop: false
-      if (newActive > this.slideLength - 1) newActive = 0;
+      if (newActive > this.slideLength - 1) {
+        newActive = 0;
+      }
 
       this.changeActive(newActive);
     }, this.config.autoplay);
@@ -132,11 +132,13 @@ class Plugin {
   changeActive(newActive) {
     this.active = newActive;
 
-    if (this.active < 0)
+    if (this.active < 0) {
       this.active = this.config.loop ? this.slideLength - 1 : 0;
+    }
 
-    if (this.active > this.slideLength - 1)
+    if (this.active > this.slideLength - 1) {
       this.active = this.config.loop ? 0 : this.slideLength - 1;
+    }
 
     setActive.call(this);
   }
@@ -156,20 +158,20 @@ class Plugin {
     this.nodes.next.hidden = true;
     this.nodes.playstop.hidden = true;
 
-    this.nodes.overflow.removeAttribute("style")
+    this.nodes.overflow.removeAttribute("style");
+    this.nodes.wrapper.removeAttribute("style");
+
+    this.nodes.items.forEach((nodes) => {
+      nodes.forEach((node) => {
+        node.removeAttribute("tabindex");
+        node.removeAttribute("aria-hidden");
+        node.removeAttribute("style");
+      })
+    });
 
     this.el.classList.remove(CONST.activeClass);
   }
 }
-
-// const pmCarousel = function (settings = {}) {
-//   const elements = document.querySelectorAll(`[${CONST.attr}]`);
-//   elements.forEach(node => {
-//     if (!node.pmCarousel) {
-//       node.pmCarousel = new Plugin(node, settings)
-//     }
-//   });
-// };
 
 const initPmCarousel = (node, settings) => {
   if (!node.pmCarousel && node.hasAttribute(CONST.attr)) {
@@ -186,5 +188,7 @@ const pmCarousel = function (settings = {}, node) {
     ? node.forEach(node => initPmCarousel(node, settings))
     : initPmCarousel(node, settings);
 };
+
+window.pmCarousel = pmCarousel;
 
 export default pmCarousel

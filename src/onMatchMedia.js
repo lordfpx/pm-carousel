@@ -10,7 +10,10 @@ function onMatchMedia() {
 
   timeout = setTimeout(() => {
     this.config = getMqConfig.call(this);
-    this.config.disable ? this.disable() : this.refresh();
+
+    this.config.disable
+      ? this.disable()
+      : this.refresh();
 
     checkDebounce = false
     clearTimeout(timeout)

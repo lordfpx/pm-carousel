@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <title>PM Carousel - documentation</title>
-  <script type="module" crossorigin src="/pm-carousel/assets/index.3bce9040.js"></script>
+  <script type="module" crossorigin src="/pm-carousel/assets/index.ffc40612.js"></script>
   <link rel="stylesheet" href="/pm-carousel/assets/index.2066f5a8.css">
 </head>
   <body class="helvetica h-100">
@@ -20,121 +20,13 @@
 
       <main>
         <div class="pa2 pa4-ns bg-lightest-blue">
-          <p>PM-Carousel, for "Pimp My Carousel" is a pretty <strong>small</strong>, <strong>accessible</strong> and <strong>vanilla JavaScript</strong> to manage your carousels. It is dependency free!</p>
+          <p>PM-Carousel, for "Pimp My Carousel" is a pretty <strong>small</strong>, <strong>accessible</strong> and <strong>vanilla JavaScript</strong> to manage your carousels. It has no dependencies!</p>
         </div>
 
         <div class="demo-wrapper pa2 pa4-ns">
-          <h2 class="dark-pink">Usage</h2>
-          <p>Minimal HTML to use <b>PM-Carousel</b>:</p>
+           <h2 class="dark-pink">Simple example</h2>
 
           <xmp>
-<div data-pm-carousel>
-  <button
-    type="button"
-    data-pm-carousel-playstop="Stop the carousel|Play the carousel"
-    hidden
-  >{text}</button>
-
-  <ul data-pm-carousel-paging hidden>
-    <li>
-      <button type="button">Slide {nbr}</button>
-    </li>
-  </ul>
-
-  <div data-pm-carousel-wrapper>
-    <div data-pm-carousel-overflow>
-      <div data-pm-carousel-item>
-        ...
-      </div>
-    </div>
-  </div>
-
-  <button
-    data-pm-carousel-prev="Previous item|Go back to last item"
-    type="button"
-    hidden
-  >{text}</button>
-  <button
-    data-pm-carousel-next="Next item|Go back to first item"
-    type="button"
-    hidden
-  >{text}</button>
-</div>
-          </xmp>
-
-          <h3 class="dark-pink">HTML detail</h3>
-          <h4 class="dark-pink">Play and Stop button</h4>
-          <p>This button is used when <b>autoplay</b> option is used. The HTML inside the button can be freely personalized, but keep <b>{text}</b>. The label inside <code>data-pm-carousel-playstop</code> attribute will be used to dynamize the text button.</p>
-          <p><b>Why is it needed?</b> Because, one day, you could have the <b>bad idea</b> to activate that option.</p>
-          <xmp>
-<button
-    type="button"
-    data-pm-carousel-playstop="Stop the carousel|Play the carousel"
-    hidden
-  >{text}</button>
-          </xmp>
-
-          <h4 class="dark-pink">Paging</h4>
-          <p>The HTML inside the button can be freely personalized, but keep <b>{nbr}</b></p>
-          <xmp>
-<ul data-pm-carousel-paging hidden>
-  <li>
-    <button type="button">Slide {nbr}</button>
-  </li>
-</ul>
-          </xmp>
-
-          <h4 class="dark-pink">The carousel</h4>
-          <xmp>
-<div data-pm-carousel-wrapper>
-  <div data-pm-carousel-overflow>
-    <div data-pm-carousel-item>
-      ...
-    </div>
-    <div data-pm-carousel-item>
-      ...
-    </div>
-    <div data-pm-carousel-item>
-      ...
-    </div>
-  </div>
-</div>
-          </xmp>
-
-          <h4 class="dark-pink">Previous and next buttons</h4>
-          <p>The HTML inside the buttons can be freely personalized, but keep <b>{nbr}</b>.
-          Labels inside <code>data-pm-carousel-prev</code> and <code>data-pm-carousel-next</code> attributes are used to dynamize the buttons.</p>
-
-          <xmp>
-<button
-  data-pm-carousel-prev="Previous item|Go back to last item"
-  type="button"
-  hidden
->{text}</button>
-<button
-  data-pm-carousel-next="Next item|Go back to first item"
-  type="button"
-  hidden
->{text}</button>
-          </xmp>
-
-          <h2 class="dark-pink">Options</h2>
-          <p>Default options:</p>
-          <xmp>
-{
-  loop: true,
-  group: 1,
-  spaceAround: 0,
-  noStartSpace: false,
-  autoplay: 0,
-}
-          </xmp>
-
-          <h2 class="dark-pink">Simple example</h2>
-
-          <xmp>
-import pmCarousel from "./main"
-
 const demo1 = document.querySelector("#demo-1")
 
 pmCarousel({}, demo1);
@@ -199,8 +91,6 @@ pmCarousel({}, demo1);
           <h2 class="dark-pink">Responsive example</h2>
 
           <xmp>
-import pmCarousel from "./main"
-
 const demo1 = document.querySelector("#demo-2")
 
 pmCarousel({
