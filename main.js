@@ -4,6 +4,7 @@ import utils from "./src/utils";
 import init from "./src/init";
 import setActive from "./src/setActive";
 import onClick from "./src/onClick";
+import onKeydown from "./src/onKeydown";
 import onTouch from "./src/onTouch";
 import onMatchMedia from "./src/onMatchMedia";
 import getMqConfig from "./src/getMqConfig";
@@ -48,6 +49,7 @@ class Plugin {
     this.onTouchstart = onTouch.onTouchStart.bind(this);
     this.onTouchMove = onTouch.onTouchMove.bind(this);
     this.onTouchEnd = onTouch.onTouchEnd.bind(this);
+    this.onKeydown = onKeydown.bind(this);
 
     // pseudo templates
     this.nodes = {

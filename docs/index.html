@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/pm-carousel/assets/favicon.17e50649.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <title>PM Carousel - documentation</title>
   <script type="module" crossorigin src="/pm-carousel/assets/index.ffc40612.js"></script>
   <link rel="stylesheet" href="/pm-carousel/assets/index.2066f5a8.css">
@@ -108,7 +108,7 @@ pmCarousel({
     },
     {
       minWidth: "800px",
-      group: 4,
+      group: 3,
     },
   ]
 }, demo2);
@@ -128,18 +128,12 @@ pmCarousel({
               <b>{text}</b>
             </button>
 
-            <!--
-              navigation dots :
-              freely personalize DOM but keep {nbr}
-              and data-pm-carousel-paging attribute
-            -->
             <ul data-pm-carousel-paging hidden>
               <li>
                 <button type="button"><b>Slide {nbr}</b></button>
               </li>
             </ul>
 
-            <!-- Carousel-->
             <div data-pm-carousel-wrapper>
               <div data-pm-carousel-overflow>
                 <div data-pm-carousel-item>
@@ -165,11 +159,6 @@ pmCarousel({
               </div>
             </div>
 
-            <!--
-              Prev/next :
-              freely personalize DOM but keep {text}
-              and data-pm-carousel-prev and data-pm-carousel-next attributes
-            -->
             <button
               data-pm-carousel-prev="Previous item|Go back to last item"
               type="button"
@@ -190,11 +179,11 @@ pmCarousel({
 
       <footer class="pa2 pa4-ns bg-dark-blue">
         <p class="lightest-blue tc">
-          © 2020, Thierry Philippe (<a class="b link pink no-underline underline-hover" href="https://twitter.com/lordfpx">@lordfpx</a>)
+          © 2021, Thierry Philippe (<a class="b link pink no-underline underline-hover" href="https://twitter.com/lordfpx">@lordfpx</a>)
         </p>
       </footer>
     </div>
 
-    
+
   </body>
 </html>

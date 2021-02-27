@@ -1,6 +1,13 @@
 # pm-carousel
 Accessible carousel plugin written in JS with no dependencies
 
+## Features
+
+- Fully accessible if you respect the HTML markup
+- Keyboard navigation (keyboard arrows, Home and End keys)
+- responsive carousel settings
+- no dependencies
+- Vanilla JS
 
 ## HTML markup
 

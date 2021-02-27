@@ -25,6 +25,7 @@ function init() {
   build.call(this, ["slides", "wrappers", "playstop", "paging"]);
 
   this.el.addEventListener("click", this.onClick);
+  this.el.addEventListener("keydown", this.onKeydown);
 
   this.nodes.wrapper.addEventListener("touchstart", this.onTouchStart);
   this.nodes.wrapper.addEventListener("touchmove", this.onTouchMove);

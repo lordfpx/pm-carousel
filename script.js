@@ -16,7 +16,7 @@ pmCarousel({
   responsive: [
     {
       minWidth: "800px",
-      group: 4,
+      group: 3,
     },
     {
       minWidth: "400px",
