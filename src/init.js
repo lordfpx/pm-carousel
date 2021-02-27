@@ -31,7 +31,8 @@ function init() {
   this.nodes.wrapper.addEventListener("touchmove", this.onTouchMove);
   this.nodes.wrapper.addEventListener("touchend", this.onTouchEnd);
 
-  if (this.config.autoplay) {
+  // autoplay should be a number, not a boolean
+  if (this.config.autoplay > 1 && this.nodes.playstop) {
     // can't autoplay without loop
     this.config.loop = true;
     this.autoplayStatus = "play";

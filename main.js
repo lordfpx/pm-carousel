@@ -59,22 +59,35 @@ class Plugin {
       playstop: this.el.querySelector(`[${CONST.attrPlaystop}]`),
     };
     this.pagingBtnString = this.nodes.paging.children[0].outerHTML;
-    this.playstopString = this.nodes.playstop.children[0].outerHTML;
-    this.prevString = this.nodes.prev.children[0].outerHTML;
-    this.nextString = this.nodes.next.children[0].outerHTML;
 
     // Labels
-    const playstopTexts = this.nodes.playstop.getAttribute(CONST.attrPlaystop).split("|");
-    const prevTexts = this.nodes.prev.getAttribute(CONST.attrPrev).split("|");
-    const nextTexts = this.nodes.next.getAttribute(CONST.attrNext).split("|");
-    this.texts = {
-      stop: playstopTexts[0],
-      play: playstopTexts[1],
-      prev: prevTexts[0],
-      prevFirst: prevTexts[1],
-      next: nextTexts[0],
-      nextLast: nextTexts[1],
-    };
+    this.texts = {}
+
+    if (this.nodes.playstop) {
+      this.playstopString = this.nodes.playstop.children[0].outerHTML;
+      const playstopTexts = this.nodes.playstop.getAttribute(CONST.attrPlaystop).split("|");
+
+      this.texts = {
+        ...this.texts,
+        stop: playstopTexts[0],
+        play: playstopTexts[1],
+      };
+    }
+
+    if (this.nodes.prev && this.nodes.next) {
+      this.prevString = this.nodes.prev.children[0].outerHTML;
+      this.nextString = this.nodes.next.children[0].outerHTML;
+      const prevTexts = this.nodes.prev.getAttribute(CONST.attrPrev).split("|");
+      const nextTexts = this.nodes.next.getAttribute(CONST.attrNext).split("|");
+
+      this.texts = {
+        ...this.texts,
+        prev: prevTexts[0],
+        prevFirst: prevTexts[1],
+        next: nextTexts[0],
+        nextLast: nextTexts[1],
+      };
+    }
 
     if (!this.config.disable) {
       init.call(this);
@@ -86,6 +99,8 @@ class Plugin {
   }
 
   play() {
+    if (!this.nodes.playstop) return;
+
     // "stop" status !== pause
     if (this.autoplayStatus === "stop") return;
 
@@ -114,6 +129,8 @@ class Plugin {
   }
 
   stop() {
+    if (!this.nodes.playstop) return;
+
     this.autoplayStatus = "stop";
     this.nodes.playstop.classList.remove("is-playing");
 
@@ -123,6 +140,8 @@ class Plugin {
   }
 
   toggleAutoplay() {
+    if (!this.nodes.playstop) return;
+
     if (this.autoplayStatus === "play") {
       this.stop();
     } else if (this.autoplayStatus === "stop") {

@@ -2,6 +2,8 @@ import CONST from "./CONST";
 
 const buildActions = {
   playstop: function () {
+    if (!this.nodes.playstop) return;
+
     // play/stop
     this.nodes.playstop.hidden = this.config.autoplay ? false : true;
   },

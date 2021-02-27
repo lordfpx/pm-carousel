@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <title>PM Carousel - documentation</title>
-  <script type="module" crossorigin src="/pm-carousel/assets/index.d5520bb6.js"></script>
+  <script type="module" crossorigin src="/pm-carousel/assets/index.836d9491.js"></script>
   <link rel="stylesheet" href="/pm-carousel/assets/index.2066f5a8.css">
 </head>
   <body class="helvetica h-100">
@@ -88,6 +88,84 @@ pmCarousel({}, demo1);
             </button>
           </div>
 
+          <h2 class="dark-pink">No previous and next buttons</h2>
+
+          <div id="demo-3" data-pm-carousel>
+            <button
+              type="button"
+              data-pm-carousel-playstop="Stop the carousel|Play the carousel"
+              hidden
+            >
+              <b>{text}</b>
+            </button>
+
+            <ul data-pm-carousel-paging hidden>
+              <li>
+                <button type="button"><b>Slide {nbr}</b></button>
+              </li>
+            </ul>
+
+            <div data-pm-carousel-wrapper>
+              <div data-pm-carousel-overflow>
+                <div data-pm-carousel-item>
+                  <h2>Fashion news</h2>
+                  <p>Content of panel 1</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fragrance news</h2>
+                  <p>Content of panel 2</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Beauty news</h2>
+                  <p>Content of panel 3</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fashion news</h2>
+                  <p>Content of panel 4</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fragrance news</h2>
+                  <p>Content of panel 5</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="dark-pink">No play and pause buttons</h2>
+
+          <div id="demo-4" data-pm-carousel>
+            <ul data-pm-carousel-paging hidden>
+              <li>
+                <button type="button"><b>Slide {nbr}</b></button>
+              </li>
+            </ul>
+
+            <div data-pm-carousel-wrapper>
+              <div data-pm-carousel-overflow>
+                <div data-pm-carousel-item>
+                  <h2>Fashion news</h2>
+                  <p>Content of panel 1</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fragrance news</h2>
+                  <p>Content of panel 2</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Beauty news</h2>
+                  <p>Content of panel 3</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fashion news</h2>
+                  <p>Content of panel 4</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fragrance news</h2>
+                  <p>Content of panel 5</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <h2 class="dark-pink">Responsive example</h2>
 
           <xmp>
@@ -108,18 +186,14 @@ pmCarousel({
     },
     {
       minWidth: "800px",
-      group: 4,
+      group: 3,
+      autoplay: 4000,
     },
   ]
 }, demo2);
           </xmp>
 
           <div id="demo-2" data-pm-carousel>
-            <!--
-              Play/pause :
-              freely personalize DOM but keep {text}
-              and data-pm-carousel-playstop attribute
-            -->
             <button
               type="button"
               data-pm-carousel-playstop="Stop the carousel|Play the carousel"
@@ -128,18 +202,12 @@ pmCarousel({
               <b>{text}</b>
             </button>
 
-            <!--
-              navigation dots :
-              freely personalize DOM but keep {nbr}
-              and data-pm-carousel-paging attribute
-            -->
             <ul data-pm-carousel-paging hidden>
               <li>
                 <button type="button"><b>Slide {nbr}</b></button>
               </li>
             </ul>
 
-            <!-- Carousel-->
             <div data-pm-carousel-wrapper>
               <div data-pm-carousel-overflow>
                 <div data-pm-carousel-item>
@@ -165,11 +233,6 @@ pmCarousel({
               </div>
             </div>
 
-            <!--
-              Prev/next :
-              freely personalize DOM but keep {text}
-              and data-pm-carousel-prev and data-pm-carousel-next attributes
-            -->
             <button
               data-pm-carousel-prev="Previous item|Go back to last item"
               type="button"
@@ -190,7 +253,7 @@ pmCarousel({
 
       <footer class="pa2 pa4-ns bg-dark-blue">
         <p class="lightest-blue tc">
-          © 2020, Thierry Philippe (<a class="b link pink no-underline underline-hover" href="https://twitter.com/lordfpx">@lordfpx</a>)
+          © 2021, Thierry Philippe (<a class="b link pink no-underline underline-hover" href="https://twitter.com/lordfpx">@lordfpx</a>)
         </p>
       </footer>
     </div>
