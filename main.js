@@ -94,7 +94,7 @@ class Plugin {
     }
   }
 
-  refresh() {
+  reinit() {
     init.call(this)
   }
 

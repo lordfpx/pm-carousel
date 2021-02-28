@@ -13,7 +13,7 @@ function onMatchMedia() {
 
     this.config.disable
       ? this.disable()
-      : this.refresh();
+      : this.reinit();
 
     checkDebounce = false
     clearTimeout(timeout)

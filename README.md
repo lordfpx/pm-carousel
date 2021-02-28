@@ -137,7 +137,9 @@ import pmCarousel from "pm-carousel";
 
 If you only need to load the script in you page, you can find the `umd` version inside the `dist` folder: `pm-carousel.umd.js`.
 
-### 2 ways to initialize `pm-carousel`:
+## Initialize
+
+2 ways to initialize `pm-carousel`:
 
 - For all carousels:
 
@@ -155,9 +157,9 @@ If you only need to load the script in you page, you can find the `umd` version 
 
 Both methods can be called again when new carousels are injected into the DOM.
 
-### Managing settings
+## Settings
 
-2 solutions:
+2 methods:
 
 - When calling `pmCarousel` function gloabaly or for specified carousels indeed:
 
@@ -207,10 +209,50 @@ Both methods can be called again when new carousels are injected into the DOM.
   </div>
   ```
 
-### Responsive settings
+## Responsive settings
 
 Have you noticed the `reponsive` key? That makes really easy to make your carousel fully responsive.
 
 You can use whatever unit you want for the `minWidth` setting.
 
 The `disable` setting will deactivate the carousel.
+
+
+## API
+
+### Pay and Stop
+
+Only when Play/PAuse button is present.
+
+```JS
+const myCarousels = document.querySelectorAll(".my-class");
+
+// Start playing
+myCarousels.pmCarousel.play()
+
+// Stop playing
+myCarousels.pmCarousel.stop()
+
+// Toggle Play or Stop
+myCarousels.pmCarousel.toggleAutoplay()
+```
+
+### Change current page
+
+```JS
+const myCarousels = document.querySelectorAll(".my-class");
+
+myCarousels.pmCarousel.changeActive(2)
+```
+
+### Disable and reinit
+
+```JS
+const myCarousels = document.querySelectorAll(".my-class");
+
+// Disable Carousel
+myCarousels.pmCarousel.disable()
+
+// Reinit the Carousel again
+myCarousels.pmCarousel.reinit()
+```
