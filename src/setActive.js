@@ -9,7 +9,14 @@ function setActive() {
   // Le nbr de page est différent du nbr de slides !
   if (this.nodes.paging) {
     this.nodes.pages.forEach((node, index) => {
-      let pageBtn = node.tagName === "BUTTON" ? node : node.querySelector("button");
+      let pageBtn = node
+
+      // button child
+      const btnNode = node.querySelector("button")
+
+      if (btnNode) {
+        pageBtn = btnNode
+      }
 
       if (index === this.active) {
         pageBtn.setAttribute("aria-current", "true");

@@ -30,8 +30,13 @@ const demo5 = document.querySelector("#demo5")
 pmCarousel({}, demo5);
 
 
-// Responsive
+// With passive pagination indicator and Previous/Next buttons
 const demo6 = document.querySelector("#demo6")
+pmCarousel({}, demo6);
+
+
+// Responsive
+const demo7 = document.querySelector("#demo7")
 
 pmCarousel({
   default: {
@@ -52,4 +57,4 @@ pmCarousel({
       disable: true,
     },
   ]
-}, demo6);
+}, demo7);
