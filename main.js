@@ -58,7 +58,10 @@ class Plugin {
       next: this.el.querySelector(`[${CONST.attrNext}]`),
       playstop: this.el.querySelector(`[${CONST.attrPlaystop}]`),
     };
-    this.pagingBtnString = this.nodes.paging.children[0].outerHTML;
+
+    if (this.nodes.paging) {
+      this.pagingBtnString = this.nodes.paging.children[0].outerHTML;
+    }
 
     // Labels
     this.texts = {}
@@ -69,8 +72,8 @@ class Plugin {
 
       this.texts = {
         ...this.texts,
-        stop: playstopTexts[0],
-        play: playstopTexts[1],
+        play: playstopTexts[0],
+        stop: playstopTexts[1],
       };
     }
 
@@ -99,10 +102,8 @@ class Plugin {
   }
 
   play() {
-    if (!this.nodes.playstop) return;
-
     // "stop" status !== pause
-    if (this.autoplayStatus === "stop") return;
+    if (!this.nodes.playstop || this.autoplayStatus === "stop") return;
 
     this.pause(); // clear interval
     this.autoplayStatus = "play";

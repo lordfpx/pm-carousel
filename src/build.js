@@ -53,6 +53,8 @@ const buildActions = {
   },
 
   paging: function () {
+    if (!this.nodes.paging) return;
+
     let newPage, pages, btnString;
 
     pages = document.createDocumentFragment();

@@ -7,17 +7,19 @@ function setActive() {
   this.activeSlides = [];
 
   // Le nbr de page est différent du nbr de slides !
-  this.nodes.pages.forEach((node, index) => {
-    let pageBtn = node.tagName === "BUTTON" ? node : node.querySelector("button");
+  if (this.nodes.paging) {
+    this.nodes.pages.forEach((node, index) => {
+      let pageBtn = node.tagName === "BUTTON" ? node : node.querySelector("button");
 
-    if (index === this.active) {
-      pageBtn.setAttribute("aria-current", "true");
-      node.classList.add(CONST.activeClass);
-    } else {
-      pageBtn.removeAttribute("aria-current");
-      node.classList.remove(CONST.activeClass);
-    }
-  });
+      if (index === this.active) {
+        pageBtn.setAttribute("aria-current", "true");
+        node.classList.add(CONST.activeClass);
+      } else {
+        pageBtn.removeAttribute("aria-current");
+        node.classList.remove(CONST.activeClass);
+      }
+    });
+  }
 
   this.nodes.items.forEach((nodes, index) => {
     nodes.forEach((node, indexFirstItem) => {

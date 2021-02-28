@@ -1,23 +1,37 @@
 import pmCarousel from "./main"
 
-// Simple
-const demo1 = document.querySelector("#demo-1")
+// Complete example
+const demo1 = document.querySelector("#demo1")
+pmCarousel({
+  default: {
+    autoplay: 3000,
+  }
+}, demo1);
 
-pmCarousel({}, demo1);
+// With Pause/Play button
+const demo2 = document.querySelector("#demo2")
+pmCarousel({  default: {
+  autoplay: 3000,
+}}, demo2);
 
-// No prev/next buttons
-const demo3 = document.querySelector("#demo-3")
 
+// With Previous/Next buttons
+const demo3 = document.querySelector("#demo3")
 pmCarousel({}, demo3);
 
-// No play/pause buttons
-const demo4 = document.querySelector("#demo-4")
 
+// With Pagination
+const demo4 = document.querySelector("#demo4")
 pmCarousel({}, demo4);
 
 
+// With pagination and Previous/Next buttons
+const demo5 = document.querySelector("#demo5")
+pmCarousel({}, demo5);
+
+
 // Responsive
-const demo2 = document.querySelector("#demo-2")
+const demo6 = document.querySelector("#demo6")
 
 pmCarousel({
   default: {
@@ -38,4 +52,4 @@ pmCarousel({
       disable: true,
     },
   ]
-}, demo2);
+}, demo6);

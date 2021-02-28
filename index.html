@@ -22,15 +22,15 @@
         </div>
 
         <div class="demo-wrapper pa2 pa4-ns">
-           <h2 class="dark-pink">Simple example</h2>
+          <h2 class="dark-pink">Complete example</h2>
 
           <xmp>
-const demo1 = document.querySelector("#demo-1")
+const demo1 = document.querySelector("#demo1")
 
 pmCarousel({}, demo1);
           </xmp>
 
-          <div id="demo-1" data-pm-carousel>
+          <div id="demo1" data-pm-carousel>
             <button
               type="button"
               data-pm-carousel-playstop="Stop the carousel|Play the carousel"
@@ -86,9 +86,9 @@ pmCarousel({}, demo1);
             </button>
           </div>
 
-          <h2 class="dark-pink">No previous and next buttons</h2>
+          <h2 class="dark-pink">With Pause/Play button</h2>
 
-          <div id="demo-3" data-pm-carousel>
+          <div id="demo2" data-pm-carousel>
             <button
               type="button"
               data-pm-carousel-playstop="Stop the carousel|Play the carousel"
@@ -97,12 +97,6 @@ pmCarousel({}, demo1);
               <b>{text}</b>
             </button>
 
-            <ul data-pm-carousel-paging hidden>
-              <li>
-                <button type="button"><b>Slide {nbr}</b></button>
-              </li>
-            </ul>
-
             <div data-pm-carousel-wrapper>
               <div data-pm-carousel-overflow>
                 <div data-pm-carousel-item>
@@ -129,9 +123,88 @@ pmCarousel({}, demo1);
             </div>
           </div>
 
-          <h2 class="dark-pink">No play and pause buttons</h2>
+          <h2 class="dark-pink">With Previous/Next buttons</h2>
 
-          <div id="demo-4" data-pm-carousel>
+          <div id="demo3" data-pm-carousel>
+            <div data-pm-carousel-wrapper>
+              <div data-pm-carousel-overflow>
+                <div data-pm-carousel-item>
+                  <h2>Fashion news</h2>
+                  <p>Content of panel 1</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fragrance news</h2>
+                  <p>Content of panel 2</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Beauty news</h2>
+                  <p>Content of panel 3</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fashion news</h2>
+                  <p>Content of panel 4</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fragrance news</h2>
+                  <p>Content of panel 5</p>
+                </div>
+              </div>
+            </div>
+
+            <button
+              data-pm-carousel-prev="Previous item|Go back to last item"
+              type="button"
+              hidden
+            >
+              <b>{text}</b>
+            </button>
+            <button
+              data-pm-carousel-next="Next item|Go back to first item"
+              type="button"
+              hidden
+            >
+              <b>{text}</b>
+            </button>
+          </div>
+
+          <h2 class="dark-pink">With pagination</h2>
+
+          <div id="demo4" data-pm-carousel>
+            <div data-pm-carousel-wrapper>
+              <div data-pm-carousel-overflow>
+                <div data-pm-carousel-item>
+                  <h2>Fashion news</h2>
+                  <p>Content of panel 1</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fragrance news</h2>
+                  <p>Content of panel 2</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Beauty news</h2>
+                  <p>Content of panel 3</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fashion news</h2>
+                  <p>Content of panel 4</p>
+                </div>
+                <div data-pm-carousel-item>
+                  <h2>Fragrance news</h2>
+                  <p>Content of panel 5</p>
+                </div>
+              </div>
+            </div>
+
+            <ul data-pm-carousel-paging hidden>
+              <li>
+                <button type="button"><b>Slide {nbr}</b></button>
+              </li>
+            </ul>
+          </div>
+
+          <h2 class="dark-pink">With pagination and Previous/Next buttons</h2>
+
+          <div id="demo5" data-pm-carousel>
             <ul data-pm-carousel-paging hidden>
               <li>
                 <button type="button"><b>Slide {nbr}</b></button>
@@ -162,12 +235,27 @@ pmCarousel({}, demo1);
                 </div>
               </div>
             </div>
+
+            <button
+              data-pm-carousel-prev="Previous item|Go back to last item"
+              type="button"
+              hidden
+            >
+              <b>{text}</b>
+            </button>
+            <button
+              data-pm-carousel-next="Next item|Go back to first item"
+              type="button"
+              hidden
+            >
+              <b>{text}</b>
+            </button>
           </div>
 
           <h2 class="dark-pink">Responsive example</h2>
 
           <xmp>
-const demo1 = document.querySelector("#demo-2")
+const demo6 = document.querySelector("#demo6")
 
 pmCarousel({
   default: {
@@ -188,10 +276,10 @@ pmCarousel({
       autoplay: 4000,
     },
   ]
-}, demo2);
+}, demo6);
           </xmp>
 
-          <div id="demo-2" data-pm-carousel>
+          <div id="demo6" data-pm-carousel>
             <button
               type="button"
               data-pm-carousel-playstop="Stop the carousel|Play the carousel"
