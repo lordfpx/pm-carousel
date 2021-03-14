@@ -1,30 +1,30 @@
-import CONST from "./CONST";
+import { ATTR } from './constants'
 
-function onClick(ev) {
-  let newActive = this.active;
-  let targetNode = ev.target;
+function onClick (ev) {
+  let newActive = this.active
+  const targetNode = ev.target
 
-  const isPlaystop = targetNode.closest(`[${CONST.attr}-playstop]`)
-  const isPrev = targetNode.closest(`[${CONST.attr}-prev]`)
-  const isNext = targetNode.closest(`[${CONST.attr}-next]`)
-  const isPaging = targetNode.closest(`[${CONST.attr}-paging]`)
+  const isPlaystop = targetNode.closest(`[${ATTR}-playstop]`)
+  const isPrev = targetNode.closest(`[${ATTR}-prev]`)
+  const isNext = targetNode.closest(`[${ATTR}-next]`)
+  const isPaging = targetNode.closest(`[${ATTR}-paging]`)
 
   if (isPlaystop) {
-    this.toggleAutoplay();
-    return;
+    this.toggleAutoplay()
+    return
   } else if (isPrev) {
-    newActive--;
+    newActive--
   } else if (isNext) {
-    newActive++;
+    newActive++
   } else if (isPaging && isPaging.querySelector('button')) {
-    let targetBtn = targetNode.closest(`[${CONST.attr}-paging] li`);
-    newActive = this.nodes.pages.indexOf(targetBtn);
+    const targetBtn = targetNode.closest(`[${ATTR}-paging] li`)
+    newActive = this.nodes.pages.indexOf(targetBtn)
   } else {
-    return;
+    return
   }
 
-  this.stop();
-  this.changeActive(newActive);
+  this.stop()
+  this.changeActive(newActive)
 }
 
-export default onClick;
+export default onClick

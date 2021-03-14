@@ -3,10 +3,10 @@ const { resolve } = require('path')
 
 module.exports = {
   build: {
-    outDir: "dist",
+    outDir: 'dist',
     lib: {
       entry: resolve(__dirname, './main.js'),
-      name: "pm-carousel"
-    },
-  },
+      name: 'pm-carousel'
+    }
+  }
 }

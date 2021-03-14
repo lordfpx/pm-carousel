@@ -1,4 +1,5 @@
 # pm-carousel
+
 Accessible carousel plugin written in JS with no dependencies
 
 ## Features
@@ -19,7 +20,9 @@ The HTML order is very important to be fully accessible. Minimal HTML to use `pm
     type="button"
     data-pm-carousel-playstop="Stop the carousel|Play the carousel"
     hidden
-  >{text}</button>
+  >
+    {text}
+  </button>
 
   <ul data-pm-carousel-paging hidden>
     <li>
@@ -29,9 +32,7 @@ The HTML order is very important to be fully accessible. Minimal HTML to use `pm
 
   <div data-pm-carousel-wrapper>
     <div data-pm-carousel-overflow>
-      <div data-pm-carousel-item>
-        ...
-      </div>
+      <div data-pm-carousel-item>...</div>
     </div>
   </div>
 
@@ -39,22 +40,29 @@ The HTML order is very important to be fully accessible. Minimal HTML to use `pm
     data-pm-carousel-prev="Previous item|Go back to last item"
     type="button"
     hidden
-  >{text}</button>
+  >
+    {text}
+  </button>
   <button
     data-pm-carousel-next="Next item|Go back to first item"
     type="button"
     hidden
-  >{text}</button>
+  >
+    {text}
+  </button>
 </div>
 ```
 
 - **Play and Stop button**
+
   ```html
   <button
     type="button"
     data-pm-carousel-playstop="Stop the carousel|Play the carousel"
     hidden
-  >{text}</button>
+  >
+    {text}
+  </button>
   ```
 
 - **Paging**
@@ -70,18 +78,13 @@ The HTML order is very important to be fully accessible. Minimal HTML to use `pm
   ```
 
 - **The carousel**
+
   ```html
   <div data-pm-carousel-wrapper>
     <div data-pm-carousel-overflow>
-      <div data-pm-carousel-item>
-        ...
-      </div>
-      <div data-pm-carousel-item>
-        ...
-      </div>
-      <div data-pm-carousel-item>
-        ...
-      </div>
+      <div data-pm-carousel-item>...</div>
+      <div data-pm-carousel-item>...</div>
+      <div data-pm-carousel-item>...</div>
     </div>
   </div>
   ```
@@ -97,18 +100,23 @@ The HTML order is very important to be fully accessible. Minimal HTML to use `pm
     data-pm-carousel-prev="Previous item|Go back to last item"
     type="button"
     hidden
-  >{text}</button>
+  >
+    {text}
+  </button>
 
   <button
     data-pm-carousel-next="Next item|Go back to first item"
     type="button"
     hidden
-  >{text}</button>
+  >
+    {text}
+  </button>
   ```
 
 ## Settings
 
 Default settings:
+
 ```js
 {
   loop: true,
@@ -124,10 +132,6 @@ Default settings:
 ```sh
 npm i pm-carousel --save
 ```
-or
-```sh
-yarn add pm-carousel
-```
 
 Then import `pm-carousel`:
 
@@ -135,7 +139,7 @@ Then import `pm-carousel`:
 import pmCarousel from "pm-carousel";
 ```
 
-If you only need to load the script in you page, you can find the `umd` version inside the `dist` folder: `pm-carousel.umd.js`.
+If you need to load the script directly on your page, or to import it the "old-fashion way" (see [https://github.com/umdjs/umd]()), you can find the `umd` version inside the `dist` folder: `pm-carousel.umd.js`.
 
 ## Initialize
 
@@ -181,7 +185,7 @@ Both methods can be called again when new carousels are injected into the DOM.
         minWidth: "600px",
         disable: true,
       },
-    ]
+    ],
   });
   ```
 
@@ -216,7 +220,6 @@ Have you noticed the `reponsive` key? That makes really easy to make your carous
 You can use whatever unit you want for the `minWidth` setting.
 
 The `disable` setting will deactivate the carousel.
-
 
 ## API
 
