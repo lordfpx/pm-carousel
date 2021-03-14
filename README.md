@@ -1,6 +1,8 @@
 # pm-carousel
 
-Accessible carousel plugin written in JS with no dependencies
+Accessible carousel plugin written in JS with no dependencies.
+
+Examples here: [https://lordfpx.github.io/pm-carousel/](https://lordfpx.github.io/pm-carousel/)
 
 ## Features
 
@@ -139,7 +141,7 @@ Then import `pm-carousel`:
 import pmCarousel from "pm-carousel";
 ```
 
-If you need to load the script directly on your page, or to import it the "old-fashion way" (see [https://github.com/umdjs/umd]()), you can find the `umd` version inside the `dist` folder: `pm-carousel.umd.js`.
+If you need to load the script directly on your page, or to import it the "old-fashion way" (see [https://github.com/umdjs/umd](https://github.com/umdjs/umd)), you can find the `umd` version inside the `dist` folder: `pm-carousel.umd.js`.
 
 ## Initialize
 
