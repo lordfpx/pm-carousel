@@ -1,4 +1,4 @@
-function updateScroll() {
+function updateScroll () {
   this._slideWidth = this.activeSlides[0].offsetWidth * this.config.group
   this._distance = this.active * this._slideWidth
 
@@ -10,7 +10,7 @@ function updateScroll() {
       this._distance -= parseInt(
         window
           .getComputedStyle(this.nodes.overflow)
-          .getPropertyValue("padding-right"),
+          .getPropertyValue('padding-right'),
         10
       )
     }

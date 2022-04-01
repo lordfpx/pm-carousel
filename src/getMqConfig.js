@@ -1,4 +1,4 @@
-function getMqConfig() {
+function getMqConfig () {
   const updatedMqConfig = this.settings.responsive
     .slice()
     .reverse()

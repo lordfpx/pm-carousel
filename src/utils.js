@@ -1,4 +1,4 @@
-function extend() {
+function extend () {
   // Variables
   const extended = {}
   let deep = false
@@ -6,7 +6,7 @@ function extend() {
   const length = arguments.length
 
   // Check if a deep merge
-  if (Object.prototype.toString.call(arguments[0]) === "[object Boolean]") {
+  if (Object.prototype.toString.call(arguments[0]) === '[object Boolean]') {
     deep = arguments[0]
     i++
   }
@@ -18,7 +18,7 @@ function extend() {
         // If deep merge and property is an object, merge properties
         if (
           deep &&
-          Object.prototype.toString.call(obj[prop]) === "[object Object]"
+          Object.prototype.toString.call(obj[prop]) === '[object Object]'
         ) {
           extended[prop] = extend(true, extended[prop], obj[prop])
         } else {
@@ -37,7 +37,7 @@ function extend() {
   return extended
 }
 
-function returnJson(string) {
+function returnJson (string) {
   try {
     return JSON.parse(string)
   } catch (error) {

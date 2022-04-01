@@ -1,9 +1,9 @@
-function prevBtn() {
+function prevBtn () {
   if (!this.nodes.prev) return
 
   const prevText = this.prevString
   this.nodes.prev.innerHTML = prevText.replace(
-    "{text}",
+    '{text}',
     this.active === 0 ? this.texts.prevFirst : this.texts.prev
   )
 

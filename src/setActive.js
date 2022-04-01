@@ -1,9 +1,9 @@
-import { ACTIVECLASS } from "./constants"
-import updateScroll from "./updateScroll"
-import prevBtn from "./prevBtn"
-import nextBtn from "./nextBtn"
+import { ACTIVECLASS } from './constants'
+import updateScroll from './updateScroll'
+import prevBtn from './prevBtn'
+import nextBtn from './nextBtn'
 
-function setActive() {
+function setActive () {
   this.activeSlides = []
 
   // Le nbr de page est différent du nbr de slides !
@@ -12,17 +12,17 @@ function setActive() {
       let pageBtn = node
 
       // button child
-      const btnNode = node.querySelector("button")
+      const btnNode = node.querySelector('button')
 
       if (btnNode) {
         pageBtn = btnNode
       }
 
       if (index === this.active) {
-        pageBtn.setAttribute("aria-current", "true")
+        pageBtn.setAttribute('aria-current', 'true')
         node.classList.add(ACTIVECLASS)
       } else {
-        pageBtn.removeAttribute("aria-current")
+        pageBtn.removeAttribute('aria-current')
         node.classList.remove(ACTIVECLASS)
       }
     })
@@ -32,13 +32,13 @@ function setActive() {
     nodes.forEach((node, indexFirstItem) => {
       if (index === this.active) {
         // put focus on 1st item from active slide
-        if (indexFirstItem === 0 && this.autoplayStatus !== "play") {
+        if (indexFirstItem === 0 && this.autoplayStatus !== 'play') {
           node.focus({ preventScroll: true })
         }
-        node.setAttribute("aria-hidden", "false")
+        node.setAttribute('aria-hidden', 'false')
         this.activeSlides.push(node)
       } else {
-        node.setAttribute("aria-hidden", "true")
+        node.setAttribute('aria-hidden', 'true')
       }
     })
   })
