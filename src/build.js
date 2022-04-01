@@ -1,4 +1,4 @@
-import { ATTR, TRANSITION, ACTIVECLASS } from './constants'
+import { ATTR, TRANSITION, ACTIVECLASS } from "./constants"
 
 const buildActions = {
   playstop: function () {
@@ -17,18 +17,18 @@ const buildActions = {
     }%)`
 
     if (this.config.noStartSpace) {
-      this.nodes.overflow.style.paddingRight = this.config.spaceAround + '%'
+      this.nodes.overflow.style.paddingRight = this.config.spaceAround + "%"
     } else {
-      this.nodes.overflow.style.paddingRight = startSpace + '%'
-      this.nodes.overflow.style.paddingLeft = startSpace + '%'
+      this.nodes.overflow.style.paddingRight = startSpace + "%"
+      this.nodes.overflow.style.paddingLeft = startSpace + "%"
     }
 
     // overflow container transition
     this.nodes.overflow.style.transition = TRANSITION
-    this.nodes.overflow.style.display = 'flex'
+    this.nodes.overflow.style.display = "flex"
 
     // wrapper overflow
-    this.nodes.wrapper.style.overflow = 'hidden'
+    this.nodes.wrapper.style.overflow = "hidden"
 
     // it's ready!
     this.el.classList.add(ACTIVECLASS)
@@ -39,10 +39,10 @@ const buildActions = {
 
     // prepare DOM
     this.nodes.items.forEach((node, index) => {
-      node.setAttribute('tabindex', '-1')
-      node.setAttribute(ATTR + '-item', index)
+      node.setAttribute("tabindex", "-1")
+      node.setAttribute(ATTR + "-item", index)
       node.style.flex = `1 0 ${100 / this.config.group}%`
-      node.style.overflow = 'hidden'
+      node.style.overflow = "hidden"
     })
 
     // split in groups
@@ -60,23 +60,23 @@ const buildActions = {
     let newPage, btnString
 
     const pages = document.createDocumentFragment()
-    this.nodes.paging.innerHTML = ''
+    this.nodes.paging.innerHTML = ""
     this.nodes.pages = []
 
     this.nodes.items.forEach((node, index) => {
       btnString = this.pagingBtnString
-      newPage = document.createElement('div')
-      newPage.innerHTML = btnString.replace('{nbr}', ++index)
+      newPage = document.createElement("div")
+      newPage.innerHTML = btnString.replace("{nbr}", ++index)
       this.nodes.pages.push(newPage.firstElementChild)
       pages.appendChild(newPage.firstElementChild)
     })
 
     this.nodes.paging.append(pages)
     this.nodes.paging.hidden = false
-  }
+  },
 }
 
-function build (actions = []) {
+function build(actions = []) {
   actions.forEach((action) => buildActions[action].call(this))
 }
 

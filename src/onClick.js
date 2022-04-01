@@ -1,6 +1,6 @@
-import { ATTR } from './constants'
+import { ATTR } from "./constants"
 
-function onClick (ev) {
+function onClick(ev) {
   let newActive = this.active
   const targetNode = ev.target
 
@@ -16,7 +16,7 @@ function onClick (ev) {
     newActive--
   } else if (isNext) {
     newActive++
-  } else if (isPaging && isPaging.querySelector('button')) {
+  } else if (isPaging && isPaging.querySelector("button")) {
     const targetBtn = targetNode.closest(`[${ATTR}-paging] li`)
     newActive = this.nodes.pages.indexOf(targetBtn)
   } else {
