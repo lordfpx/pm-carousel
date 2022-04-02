@@ -1,9 +1,9 @@
-import getMqConfig from './getMqConfig'
+import getMqConfig from "./getMqConfig"
 
 let timeout
 let checkDebounce = false
 
-function onMatchMedia () {
+function onMatchMedia() {
   if (checkDebounce) return
 
   checkDebounce = true

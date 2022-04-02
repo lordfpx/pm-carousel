@@ -8,13 +8,14 @@ Examples here: [https://lordfpx.github.io/pm-carousel/](https://lordfpx.github.i
 
 - Fully accessible if you respect the HTML markup
 - Keyboard navigation (keyboard arrows, Home and End keys)
+- touch swipe
 - responsive carousel settings
 - no dependencies
 - Vanilla JS
 
 ## HTML markup
 
-The HTML order is very important to be fully accessible. Minimal HTML to use `pm-carousel`:
+The HTML order is very important to be fully accessible. Full HTML example to use `pm-carousel`:
 
 ```html
 <div data-pm-carousel>
@@ -55,7 +56,7 @@ The HTML order is very important to be fully accessible. Minimal HTML to use `pm
 </div>
 ```
 
-- **Play and Stop button**
+- **Play and Stop button (optional)**
 
   ```html
   <button
@@ -67,9 +68,9 @@ The HTML order is very important to be fully accessible. Minimal HTML to use `pm
   </button>
   ```
 
-- **Paging**
+- **Paging (optional)**
 
-  The HTML inside the button can be freely personalized, but keep **{nbr}**.
+  The HTML inside the button can be freely personalized (**{nbr}** is mandatory).
 
   ```html
   <ul data-pm-carousel-paging hidden>
@@ -93,7 +94,7 @@ The HTML order is very important to be fully accessible. Minimal HTML to use `pm
 
 - **Previous and next buttons**
 
-  The HTML inside the buttons can be freely personalized, but keep **{nbr}**.
+  The HTML inside the buttons can be freely personalized (**{nbr}** is mandatory).
 
   Labels inside `data-pm-carousel-prev` and `data-pm-carousel-next` attributes are used to dynamize the buttons.
 
@@ -121,11 +122,11 @@ Default settings:
 
 ```js
 {
-  loop: true,
-  group: 1,
-  spaceAround: 0,
-  noStartSpace: false,
-  autoplay: 0,
+  loop: true,          // Will loop
+  group: 1,            // nbr of slides per page
+  spaceAround: 0,      // centered mode with partial view of surrounding slides (express in %)
+  noStartSpace: false, // in combinaison with "spaceAround" option, but align left the carousel
+  autoplay: 0,         // speed of the autoplay (0 for disabled)
 }
 ```
 
@@ -135,10 +136,10 @@ Default settings:
 npm i pm-carousel --save
 ```
 
-Then import `pm-carousel`:
+In your script:
 
 ```js
-import pmCarousel from "pm-carousel";
+import pmCarousel from "pm-carousel"
 ```
 
 If you need to load the script directly on your page, or to import it the "old-fashion way" (see [https://github.com/umdjs/umd](https://github.com/umdjs/umd)), you can find the `umd` version inside the `dist` folder: `pm-carousel.umd.js`.
@@ -147,18 +148,18 @@ If you need to load the script directly on your page, or to import it the "old-f
 
 2 ways to initialize `pm-carousel`:
 
-- For all carousels:
+- For all carousels with default options:
 
   ```js
-  pmCarousel();
+  pmCarousel()
   ```
 
-- For specified carousels only:
+- For specified carousels only (with default options):
 
   ```js
-  const myCarousels = document.querySelectorAll(".my-class");
+  const myCarousels = document.querySelectorAll(".my-class")
 
-  pmCarousel({}, myCarousels);
+  pmCarousel({}, myCarousels)
   ```
 
 Both methods can be called again when new carousels are injected into the DOM.
@@ -167,7 +168,7 @@ Both methods can be called again when new carousels are injected into the DOM.
 
 2 methods:
 
-- When calling `pmCarousel` function gloabaly or for specified carousels indeed:
+- When calling `pmCarousel` function:
 
   ```js
   pmCarousel({
@@ -188,36 +189,41 @@ Both methods can be called again when new carousels are injected into the DOM.
         disable: true,
       },
     ],
-  });
+  })
   ```
 
-- Inside the `data-pm-carousel` attribute to be even more specific:
+- Inside the `data-pm-carousel` (the JSON must be valid!):
 
   ```html
-  <div data-pm-carousel=`{"default": {
-      "group": 1,
-    },
-    "responsive": [
+  <div
+    data-pm-carousel='
       {
-        "minWidth": "800px",
-        "group": 4,
-      },
-      {
-        "minWidth": "400px",
-        "group": 2,
-      },
-      {
-        "minWidth": "600px",
-        "disable": true,
-      },
-    ]}`>
+        "default": {
+          "group": 1
+        },
+        "responsive": [
+          {
+            "minWidth": "800px",
+            "group": 4
+          },
+          {
+            "minWidth": "400px",
+            "group": 2
+          },
+          {
+            "minWidth": "600px",
+            "disable": true
+          }
+        ]
+      }'
+  >
     ...
   </div>
   ```
 
 ## Responsive settings
 
-Have you noticed the `reponsive` key? That makes really easy to make your carousel fully responsive.
+Have you noticed the `reponsive` key in the above example? That's the way to make your carousel fully responsive.
 
 You can use whatever unit you want for the `minWidth` setting.
 
@@ -225,12 +231,14 @@ The `disable` setting will deactivate the carousel.
 
 ## API
 
+The instance of `pm-carousel` can be reached from nodes with `data-pm-carousel` attribute.
+
 ### Pay and Stop
 
-Only when Play/PAuse button is present.
+Only available when Play/PAuse button is present.
 
 ```JS
-const myCarousels = document.querySelectorAll(".my-class");
+const myCarousel = document.querySelector(".class-of-a-carousel");
 
 // Start playing
 myCarousels.pmCarousel.play()
@@ -245,15 +253,14 @@ myCarousels.pmCarousel.toggleAutoplay()
 ### Change current page
 
 ```JS
-const myCarousels = document.querySelectorAll(".my-class");
-
+const myCarousel = document.querySelector(".class-of-a-carousel");
 myCarousels.pmCarousel.changeActive(2)
 ```
 
 ### Disable and reinit
 
 ```JS
-const myCarousels = document.querySelectorAll(".my-class");
+const myCarousel = document.querySelector(".class-of-a-carousel");
 
 // Disable Carousel
 myCarousels.pmCarousel.disable()
