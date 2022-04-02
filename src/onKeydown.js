@@ -1,22 +1,22 @@
-function onKeydown(ev) {
+function onKeydown (ev) {
   let prevDef = false
 
   switch (ev.key) {
-    case "ArrowUp":
-    case "ArrowLeft":
+    case 'ArrowUp':
+    case 'ArrowLeft':
       prevDef = true
       this.changeActive(this.active - 1)
       break
-    case "ArrowDown":
-    case "ArrowRight":
+    case 'ArrowDown':
+    case 'ArrowRight':
       prevDef = true
       this.changeActive(this.active + 1)
       break
-    case "Home":
+    case 'Home':
       prevDef = true
       this.changeActive(0)
       break
-    case "End":
+    case 'End':
       prevDef = true
       this.changeActive(this.slideLength - 1)
       break

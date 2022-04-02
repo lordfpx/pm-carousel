@@ -141,7 +141,6 @@ function onClick(ev) {
 }
 function onKeydown(ev) {
   let prevDef = false;
-  console.log(ev.key);
   switch (ev.key) {
     case "ArrowUp":
     case "ArrowLeft":
@@ -361,9 +360,6 @@ class Plugin {
       init.call(this);
     }
   }
-  reinit() {
-    init.call(this);
-  }
   play() {
     if (!this.nodes.playstop || this.autoplayStatus === "stop")
       return;
@@ -412,6 +408,9 @@ class Plugin {
       this.active = this.config.loop ? 0 : this.slideLength - 1;
     }
     setActive.call(this);
+  }
+  reinit() {
+    init.call(this);
   }
   disable() {
     this.stop();
