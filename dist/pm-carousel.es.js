@@ -165,6 +165,7 @@ function onKeydown(ev) {
   prevDef && ev.preventDefault();
 }
 function onTouchStart(ev) {
+  this.stop();
   this.nodes.overflow.style.transition = "none";
   this._touchstartX = Math.round(ev.touches[0].pageX);
   this._slideWidth = this.nodes.wrapper.offsetWidth;

@@ -1,15 +1,15 @@
-import { TRANSITION } from "./constants"
+import { TRANSITION } from './constants'
 
-function onTouchStart(ev) {
+function onTouchStart (ev) {
   // stop autoplay
   this.stop()
 
-  this.nodes.overflow.style.transition = "none"
+  this.nodes.overflow.style.transition = 'none'
   this._touchstartX = Math.round(ev.touches[0].pageX)
   this._slideWidth = this.nodes.wrapper.offsetWidth
 }
 
-function onTouchMove(ev) {
+function onTouchMove (ev) {
   this._touchmoveX = Math.round(ev.touches[0].pageX)
   this._moveX = this._touchstartX - this._touchmoveX
 
@@ -18,7 +18,7 @@ function onTouchMove(ev) {
   }px)`
 }
 
-function onTouchEnd(ev) {
+function onTouchEnd (ev) {
   let newActive = this.active
 
   this.nodes.overflow.style.transition = TRANSITION
