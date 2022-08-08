@@ -5,7 +5,7 @@
 		"dev": "vite",
 		"build": "vite build && vite preview",
 		"build:main": "vite build --base=/pm-carousel/ && vite build -c vite.config.build.js",
-		"preversion": "npm run standard && npm run build:main && git add .",
+		"preversion": "npm run build:main && git add .",
 		"postversion": "git push && git push --tags"
 	},
 	"devDependencies": {
