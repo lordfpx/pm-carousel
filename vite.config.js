@@ -1,6 +1,6 @@
 // vite.config.js
-module.exports = {
-  build: {
-    outDir: 'docs'
-  }
+export default {
+	build: {
+		outDir: "docs",
+	},
 }

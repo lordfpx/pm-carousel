@@ -1,12 +1,14 @@
 // vite.config.js
-const { resolve } = require('path')
+const path = require("path")
 
-module.exports = {
-  build: {
-    outDir: 'dist',
-    lib: {
-      entry: resolve(__dirname, './main.js'),
-      name: 'pm-carousel'
-    }
-  }
+const resolvePath = (absolutePath) => path.resolve(__dirname, absolutePath)
+
+export default {
+	build: {
+		outDir: "dist",
+		lib: {
+			entry: resolvePath("./main.js"),
+			name: "pm-carousel",
+		},
+	},
 }
