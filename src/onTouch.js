@@ -34,7 +34,7 @@ export function onTouchMove(ev) {
 	})
 }
 
-export function onTouchEnd(ev) {
+export function onTouchEnd() {
 	if (timeoutOnTouchEnd) {
 		window.cancelAnimationFrame(timeoutOnTouchEnd)
 	}

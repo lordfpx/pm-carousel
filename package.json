@@ -6,13 +6,13 @@
 		"build": "vite build && vite preview",
 		"build:main": "vite build --base=/pm-carousel/ && vite build -c vite.config.build.js",
 		"preversion": "npm run standard && npm run build:main && git add .",
-		"postversion": "git push && git push --tags",
-		"standard": "npx standard --fix "
+		"postversion": "git push && git push --tags"
 	},
 	"devDependencies": {
-		"eslint-config-prettier": "^8.1.0",
+		"eslint": "^8.21.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-import": "^2.26.0",
 		"prismjs": "^1.23.0",
-		"standard": "^16.0.3",
 		"vite": "^3.0.4"
 	},
 	"dependencies": {
@@ -28,11 +28,5 @@
 			"import": "./dist/pm-carousel.es.js",
 			"require": "./dist/pm-carousel.umd.js"
 		}
-	},
-	"standard": {
-		"ignore": [
-			"/dist/",
-			"/docs/"
-		]
 	}
 }
