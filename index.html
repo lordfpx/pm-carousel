@@ -1,325 +1,325 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.scss" />
-    <title>PM Carousel - documentation</title>
-  </head>
-  <body class="helvetica h-100">
-    <div class="mw8 center flex flex-column h-100">
-      <header
-        class="pa2 pa4-ns bg-dark-blue flex-ns items-center justify-between"
-      >
-        <h1 class="white ma0">PM-Carousel</h1>
-        <p class="lightest-blue">
-          Full documentation on
-          <a
-            class="b link no-underline underline-hover pink"
-            href="https://github.com/lordfpx/pm-carousel"
-            >GitHub</a
-          >
-        </p>
-      </header>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./style.scss" />
+		<title>PM Carousel - documentation</title>
+	</head>
+	<body class="helvetica h-100">
+		<div class="mw8 center flex flex-column h-100">
+			<header
+				class="pa2 pa4-ns bg-dark-blue flex-ns items-center justify-between"
+			>
+				<h1 class="white ma0">PM-Carousel</h1>
+				<p class="lightest-blue">
+					Full documentation on
+					<a
+						class="b link no-underline underline-hover pink"
+						href="https://github.com/lordfpx/pm-carousel"
+						>GitHub</a
+					>
+				</p>
+			</header>
 
-      <main>
-        <div class="pa2 pa4-ns bg-lightest-blue">
-          <p>
-            PM-Carousel, for "Pimp My Carousel" is a pretty
-            <strong>small</strong>, <strong>accessible</strong> and
-            <strong>vanilla JavaScript</strong> to manage your carousels. It has
-            no dependencies!
-          </p>
-        </div>
+			<main>
+				<div class="pa2 pa4-ns bg-lightest-blue">
+					<p>
+						PM-Carousel, for "Pimp My Carousel" is a pretty
+						<strong>small</strong>, <strong>accessible</strong> and
+						<strong>vanilla JavaScript</strong> to manage your carousels. It has
+						no dependencies!
+					</p>
+				</div>
 
-        <div class="demo-wrapper pa2 pa4-ns">
-          <h2 class="dark-pink">Complete example</h2>
+				<div class="demo-wrapper pa2 pa4-ns">
+					<h2 class="dark-pink">Complete example</h2>
 
-          <xmp
+					<xmp
 >
 const demo1 = document.querySelector("#demo1")
 
 pmCarousel({}, demo1);
           </xmp>
 
-          <div id="demo1" data-pm-carousel>
-            <button
-              type="button"
-              data-pm-carousel-playstop="Stop the carousel|Play the carousel"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
+					<div id="demo1" data-pm-carousel>
+						<button
+							type="button"
+							data-pm-carousel-playstop="Stop the carousel|Play the carousel"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
 
-            <ul data-pm-carousel-paging hidden>
-              <li>
-                <button type="button"><b>Slide {nbr}</b></button>
-              </li>
-            </ul>
+						<ul data-pm-carousel-paging hidden>
+							<li>
+								<button type="button"><b>Slide {nbr}</b></button>
+							</li>
+						</ul>
 
-            <div data-pm-carousel-wrapper>
-              <div data-pm-carousel-overflow>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 1</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 2</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Beauty news</h2>
-                  <p>Content of panel 3</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 4</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 5</p>
-                </div>
-              </div>
-            </div>
+						<div data-pm-carousel-wrapper>
+							<div data-pm-carousel-overflow>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 1</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 2</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Beauty news</h2>
+									<p>Content of panel 3</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 4</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 5</p>
+								</div>
+							</div>
+						</div>
 
-            <button
-              data-pm-carousel-prev="Previous item|Go back to last item"
-              type="button"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
-            <button
-              data-pm-carousel-next="Next item|Go back to first item"
-              type="button"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
-          </div>
+						<button
+							data-pm-carousel-prev="Previous item|Go back to last item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+						<button
+							data-pm-carousel-next="Next item|Go back to first item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+					</div>
 
-          <h2 class="dark-pink">With Pause/Play button</h2>
+					<h2 class="dark-pink">With Pause/Play button</h2>
 
-          <div id="demo2" data-pm-carousel>
-            <button
-              type="button"
-              data-pm-carousel-playstop="Stop the carousel|Play the carousel"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
+					<div id="demo2" data-pm-carousel>
+						<button
+							type="button"
+							data-pm-carousel-playstop="Stop the carousel|Play the carousel"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
 
-            <div data-pm-carousel-wrapper>
-              <div data-pm-carousel-overflow>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 1</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 2</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Beauty news</h2>
-                  <p>Content of panel 3</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 4</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 5</p>
-                </div>
-              </div>
-            </div>
-          </div>
+						<div data-pm-carousel-wrapper>
+							<div data-pm-carousel-overflow>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 1</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 2</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Beauty news</h2>
+									<p>Content of panel 3</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 4</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 5</p>
+								</div>
+							</div>
+						</div>
+					</div>
 
-          <h2 class="dark-pink">With Previous/Next buttons</h2>
+					<h2 class="dark-pink">With Previous/Next buttons</h2>
 
-          <div id="demo3" data-pm-carousel>
-            <div data-pm-carousel-wrapper>
-              <div data-pm-carousel-overflow>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 1</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 2</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Beauty news</h2>
-                  <p>Content of panel 3</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 4</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 5</p>
-                </div>
-              </div>
-            </div>
+					<div id="demo3" data-pm-carousel>
+						<div data-pm-carousel-wrapper>
+							<div data-pm-carousel-overflow>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 1</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 2</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Beauty news</h2>
+									<p>Content of panel 3</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 4</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 5</p>
+								</div>
+							</div>
+						</div>
 
-            <button
-              data-pm-carousel-prev="Previous item|Go back to last item"
-              type="button"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
-            <button
-              data-pm-carousel-next="Next item|Go back to first item"
-              type="button"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
-          </div>
+						<button
+							data-pm-carousel-prev="Previous item|Go back to last item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+						<button
+							data-pm-carousel-next="Next item|Go back to first item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+					</div>
 
-          <h2 class="dark-pink">With pagination</h2>
+					<h2 class="dark-pink">With pagination</h2>
 
-          <div id="demo4" data-pm-carousel>
-            <div data-pm-carousel-wrapper>
-              <div data-pm-carousel-overflow>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 1</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 2</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Beauty news</h2>
-                  <p>Content of panel 3</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 4</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 5</p>
-                </div>
-              </div>
-            </div>
+					<div id="demo4" data-pm-carousel>
+						<div data-pm-carousel-wrapper>
+							<div data-pm-carousel-overflow>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 1</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 2</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Beauty news</h2>
+									<p>Content of panel 3</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 4</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 5</p>
+								</div>
+							</div>
+						</div>
 
-            <ul data-pm-carousel-paging hidden>
-              <li>
-                <button type="button"><b>Slide {nbr}</b></button>
-              </li>
-            </ul>
-          </div>
+						<ul data-pm-carousel-paging hidden>
+							<li>
+								<button type="button"><b>Slide {nbr}</b></button>
+							</li>
+						</ul>
+					</div>
 
-          <h2 class="dark-pink">With pagination and Previous/Next buttons</h2>
+					<h2 class="dark-pink">With pagination and Previous/Next buttons</h2>
 
-          <div id="demo5" data-pm-carousel>
-            <div data-pm-carousel-wrapper>
-              <div data-pm-carousel-overflow>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 1</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 2</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Beauty news</h2>
-                  <p>Content of panel 3</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 4</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 5</p>
-                </div>
-              </div>
-            </div>
+					<div id="demo5" data-pm-carousel>
+						<div data-pm-carousel-wrapper>
+							<div data-pm-carousel-overflow>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 1</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 2</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Beauty news</h2>
+									<p>Content of panel 3</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 4</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 5</p>
+								</div>
+							</div>
+						</div>
 
-            <ul data-pm-carousel-paging hidden>
-              <li>
-                <button type="button"><b>Slide {nbr}</b></button>
-              </li>
-            </ul>
+						<ul data-pm-carousel-paging hidden>
+							<li>
+								<button type="button"><b>Slide {nbr}</b></button>
+							</li>
+						</ul>
 
-            <button
-              data-pm-carousel-prev="Previous item|Go back to last item"
-              type="button"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
-            <button
-              data-pm-carousel-next="Next item|Go back to first item"
-              type="button"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
-          </div>
+						<button
+							data-pm-carousel-prev="Previous item|Go back to last item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+						<button
+							data-pm-carousel-next="Next item|Go back to first item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+					</div>
 
-          <h2 class="dark-pink">
-            With passive pagination indicator and Previous/Next buttons
-          </h2>
+					<h2 class="dark-pink">
+						With passive pagination indicator and Previous/Next buttons
+					</h2>
 
-          <div id="demo6" data-pm-carousel>
-            <ul data-pm-carousel-paging hidden>
-              <li>
-                <div><b>Slide {nbr}</b></div>
-              </li>
-            </ul>
+					<div id="demo6" data-pm-carousel>
+						<ul data-pm-carousel-paging hidden>
+							<li>
+								<div><b>Slide {nbr}</b></div>
+							</li>
+						</ul>
 
-            <div data-pm-carousel-wrapper>
-              <div data-pm-carousel-overflow>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 1</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 2</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Beauty news</h2>
-                  <p>Content of panel 3</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 4</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 5</p>
-                </div>
-              </div>
-            </div>
+						<div data-pm-carousel-wrapper>
+							<div data-pm-carousel-overflow>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 1</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 2</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Beauty news</h2>
+									<p>Content of panel 3</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 4</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 5</p>
+								</div>
+							</div>
+						</div>
 
-            <button
-              data-pm-carousel-prev="Previous item|Go back to last item"
-              type="button"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
-            <button
-              data-pm-carousel-next="Next item|Go back to first item"
-              type="button"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
-          </div>
+						<button
+							data-pm-carousel-prev="Previous item|Go back to last item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+						<button
+							data-pm-carousel-next="Next item|Go back to first item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+					</div>
 
-          <h2 class="dark-pink">Responsive example</h2>
+					<h2 class="dark-pink">Responsive example</h2>
 
-          <xmp
+					<xmp
 >
 const demo7 = document.querySelector("#demo7")
 
@@ -345,75 +345,75 @@ pmCarousel({
 }, demo7);
           </xmp>
 
-          <div id="demo7" data-pm-carousel>
-            <button
-              type="button"
-              data-pm-carousel-playstop="Stop the carousel|Play the carousel"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
+					<div id="demo7" data-pm-carousel>
+						<button
+							type="button"
+							data-pm-carousel-playstop="Stop the carousel|Play the carousel"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
 
-            <ul data-pm-carousel-paging hidden>
-              <li>
-                <button type="button"><b>Slide {nbr}</b></button>
-              </li>
-            </ul>
+						<ul data-pm-carousel-paging hidden>
+							<li>
+								<button type="button"><b>Slide {nbr}</b></button>
+							</li>
+						</ul>
 
-            <div data-pm-carousel-wrapper>
-              <div data-pm-carousel-overflow>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 1</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 2</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Beauty news</h2>
-                  <p>Content of panel 3</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fashion news</h2>
-                  <p>Content of panel 4</p>
-                </div>
-                <div data-pm-carousel-item>
-                  <h2>Fragrance news</h2>
-                  <p>Content of panel 5</p>
-                </div>
-              </div>
-            </div>
+						<div data-pm-carousel-wrapper>
+							<div data-pm-carousel-overflow>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 1</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 2</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Beauty news</h2>
+									<p>Content of panel 3</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 4</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 5</p>
+								</div>
+							</div>
+						</div>
 
-            <button
-              data-pm-carousel-prev="Previous item|Go back to last item"
-              type="button"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
-            <button
-              data-pm-carousel-next="Next item|Go back to first item"
-              type="button"
-              hidden
-            >
-              <b>{text}</b>
-            </button>
-          </div>
-        </div>
-      </main>
+						<button
+							data-pm-carousel-prev="Previous item|Go back to last item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+						<button
+							data-pm-carousel-next="Next item|Go back to first item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+					</div>
+				</div>
+			</main>
 
-      <footer class="pa2 pa4-ns bg-dark-blue">
-        <p class="lightest-blue tc">
-          © 2021, Thierry Philippe (<a
-            class="b link pink no-underline underline-hover"
-            href="https://twitter.com/lordfpx"
-            >@lordfpx</a
-          >)
-        </p>
-      </footer>
-    </div>
+			<footer class="pa2 pa4-ns bg-dark-blue">
+				<p class="lightest-blue tc">
+					© 2022, Thierry Philippe (<a
+						class="b link pink no-underline underline-hover"
+						href="https://twitter.com/lordfpx"
+						>@lordfpx</a
+					>)
+				</p>
+			</footer>
+		</div>
 
-    <script type="module" src="./script.js"></script>
-  </body>
+		<script type="module" src="./script.js"></script>
+	</body>
 </html>

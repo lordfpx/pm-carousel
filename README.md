@@ -19,40 +19,40 @@ The HTML order is very important to be fully accessible. Full HTML example to us
 
 ```html
 <div data-pm-carousel>
-  <button
-    type="button"
-    data-pm-carousel-playstop="Stop the carousel|Play the carousel"
-    hidden
-  >
-    {text}
-  </button>
+	<button
+		type="button"
+		data-pm-carousel-playstop="Stop the carousel|Play the carousel"
+		hidden
+	>
+		{text}
+	</button>
 
-  <ul data-pm-carousel-paging hidden>
-    <li>
-      <button type="button">Slide {nbr}</button>
-    </li>
-  </ul>
+	<ul data-pm-carousel-paging hidden>
+		<li>
+			<button type="button">Slide {nbr}</button>
+		</li>
+	</ul>
 
-  <div data-pm-carousel-wrapper>
-    <div data-pm-carousel-overflow>
-      <div data-pm-carousel-item>...</div>
-    </div>
-  </div>
+	<div data-pm-carousel-wrapper>
+		<div data-pm-carousel-overflow>
+			<div data-pm-carousel-item>...</div>
+		</div>
+	</div>
 
-  <button
-    data-pm-carousel-prev="Previous item|Go back to last item"
-    type="button"
-    hidden
-  >
-    {text}
-  </button>
-  <button
-    data-pm-carousel-next="Next item|Go back to first item"
-    type="button"
-    hidden
-  >
-    {text}
-  </button>
+	<button
+		data-pm-carousel-prev="Previous item|Go back to last item"
+		type="button"
+		hidden
+	>
+		{text}
+	</button>
+	<button
+		data-pm-carousel-next="Next item|Go back to first item"
+		type="button"
+		hidden
+	>
+		{text}
+	</button>
 </div>
 ```
 
@@ -60,11 +60,11 @@ The HTML order is very important to be fully accessible. Full HTML example to us
 
   ```html
   <button
-    type="button"
-    data-pm-carousel-playstop="Stop the carousel|Play the carousel"
-    hidden
+  	type="button"
+  	data-pm-carousel-playstop="Stop the carousel|Play the carousel"
+  	hidden
   >
-    {text}
+  	{text}
   </button>
   ```
 
@@ -74,9 +74,9 @@ The HTML order is very important to be fully accessible. Full HTML example to us
 
   ```html
   <ul data-pm-carousel-paging hidden>
-    <li>
-      <button type="button">Slide {nbr}</button>
-    </li>
+  	<li>
+  		<button type="button">Slide {nbr}</button>
+  	</li>
   </ul>
   ```
 
@@ -84,11 +84,11 @@ The HTML order is very important to be fully accessible. Full HTML example to us
 
   ```html
   <div data-pm-carousel-wrapper>
-    <div data-pm-carousel-overflow>
-      <div data-pm-carousel-item>...</div>
-      <div data-pm-carousel-item>...</div>
-      <div data-pm-carousel-item>...</div>
-    </div>
+  	<div data-pm-carousel-overflow>
+  		<div data-pm-carousel-item>...</div>
+  		<div data-pm-carousel-item>...</div>
+  		<div data-pm-carousel-item>...</div>
+  	</div>
   </div>
   ```
 
@@ -100,19 +100,19 @@ The HTML order is very important to be fully accessible. Full HTML example to us
 
   ```html
   <button
-    data-pm-carousel-prev="Previous item|Go back to last item"
-    type="button"
-    hidden
+  	data-pm-carousel-prev="Previous item|Go back to last item"
+  	type="button"
+  	hidden
   >
-    {text}
+  	{text}
   </button>
 
   <button
-    data-pm-carousel-next="Next item|Go back to first item"
-    type="button"
-    hidden
+  	data-pm-carousel-next="Next item|Go back to first item"
+  	type="button"
+  	hidden
   >
-    {text}
+  	{text}
   </button>
   ```
 
@@ -172,23 +172,23 @@ Both methods can be called again when new carousels are injected into the DOM.
 
   ```js
   pmCarousel({
-    default: {
-      group: 1,
-    },
-    responsive: [
-      {
-        minWidth: "800px",
-        group: 4,
-      },
-      {
-        minWidth: "400px",
-        group: 2,
-      },
-      {
-        minWidth: "600px",
-        disable: true,
-      },
-    ],
+  	default: {
+  		group: 1,
+  	},
+  	responsive: [
+  		{
+  			minWidth: "800px",
+  			group: 4,
+  		},
+  		{
+  			minWidth: "400px",
+  			group: 2,
+  		},
+  		{
+  			minWidth: "600px",
+  			disable: true,
+  		},
+  	],
   })
   ```
 
@@ -196,7 +196,7 @@ Both methods can be called again when new carousels are injected into the DOM.
 
   ```html
   <div
-    data-pm-carousel='
+  	data-pm-carousel='
       {
         "default": {
           "group": 1
@@ -217,7 +217,7 @@ Both methods can be called again when new carousels are injected into the DOM.
         ]
       }'
   >
-    ...
+  	...
   </div>
   ```
 
