@@ -1,15 +1,16 @@
 function nextBtn() {
 	if (!this.nodes.next) return
 
-	const nextText = this.stringTpls.next
-	this.nodes.next.innerHTML = nextText.replace(
+	this.nodes.next.innerHTML = this._templates.next.tpl.replace(
 		"{text}",
-		this.active === this.slideLength - 1 ? this.texts.nextLast : this.texts.next
+		this.activePage === this.pagesLength - 1
+			? this._templates.next.lastLabel
+			: this._templates.next.label
 	)
 
-	this.config.loop
+	this.currentSettings.loop
 		? (this.nodes.next.hidden = false)
-		: (this.nodes.next.hidden = this.active === this.slideLength - 1)
+		: (this.nodes.next.hidden = this.activePage === this.pagesLength - 1)
 }
 
 export default nextBtn

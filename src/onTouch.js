@@ -14,8 +14,8 @@ export function onTouchStart(ev) {
 		this.stop()
 
 		this.nodes.overflow.style.transition = "none"
-		this._touchstartX = Math.round(ev.touches[0].pageX)
-		this._slideWidth = this.nodes.wrapper.offsetWidth
+		this._metrics.touchstartX = Math.round(ev.touches[0].pageX)
+		this._metrics.slideWidth = this.nodes.wrapper.offsetWidth
 	})
 }
 
@@ -25,11 +25,11 @@ export function onTouchMove(ev) {
 	}
 
 	timeoutOnTouchMove = window.requestAnimationFrame(() => {
-		this._touchmoveX = Math.round(ev.touches[0].pageX)
-		this._moveX = this._touchstartX - this._touchmoveX
+		this._metrics.touchmoveX = Math.round(ev.touches[0].pageX)
+		this._metrics.moveX = this._metrics.touchstartX - this._metrics.touchmoveX
 
 		this.nodes.overflow.style.transform = `translateX(${
-			-this._distance - this._moveX
+			-this._metrics.distance - this._metrics.moveX
 		}px)`
 	})
 }
@@ -40,17 +40,18 @@ export function onTouchEnd() {
 	}
 
 	timeoutOnTouchEnd = window.requestAnimationFrame(() => {
-		let newActive = this.active
+		let newActive = this.activePage
 
 		this.nodes.overflow.style.transition = TRANSITION
 
-		if (this._moveX > this._slideWidth / 3) {
+		if (this._metrics.moveX > this._metrics.slideWidth / 3) {
 			newActive++
-		} else if (this._moveX < -this._slideWidth / 3) {
+		} else if (this._metrics.moveX < -this._metrics.slideWidth / 3) {
 			newActive--
 		} else {
 			// reset to initial position
-			this.nodes.overflow.style.transform = `translateX(${-this._distance}px)`
+			this.nodes.overflow.style.transform = `translateX(${-this._metrics
+				.distance}px)`
 			return
 		}
 

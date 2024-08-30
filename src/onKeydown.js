@@ -5,12 +5,12 @@ function onKeydown(ev) {
 		case "ArrowUp":
 		case "ArrowLeft":
 			prevDef = true
-			this.changeActive(this.active - 1)
+			this.changeActive(this.activePage - 1)
 			break
 		case "ArrowDown":
 		case "ArrowRight":
 			prevDef = true
-			this.changeActive(this.active + 1)
+			this.changeActive(this.activePage + 1)
 			break
 		case "Home":
 			prevDef = true
@@ -18,7 +18,7 @@ function onKeydown(ev) {
 			break
 		case "End":
 			prevDef = true
-			this.changeActive(this.slideLength - 1)
+			this.changeActive(this.pagesLength - 1)
 			break
 	}
 

@@ -1,7 +1,7 @@
 import { ATTR } from "./constants"
 
 function onClick(ev) {
-	let newActive = this.active
+	let newActive = this.activePage
 	const targetNode = ev.target
 
 	const isPlaystop = targetNode.closest(`[${ATTR}-playstop]`)

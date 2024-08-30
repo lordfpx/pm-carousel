@@ -1,128 +1,94 @@
 import {
 	ATTR,
-	ATTRPAGING,
+	ACTIVECLASS,
+	ATTRITEM,
 	ATTRPREV,
 	ATTRNEXT,
 	ATTRPLAYSTOP,
-	ACTIVECLASS,
 } from "./src/constants"
-import { extend } from "./src/utils/extend"
-import { toJson } from "./src/utils/toJson"
 
 import init from "./src/init"
 import setActive from "./src/setActive"
-import onMatchMedia from "./src/onMatchMedia"
-import getMqConfig from "./src/getMqConfig"
-
-const DEFAULT = {
-	default: {
-		loop: true,
-		group: 1,
-		spaceAround: 0,
-		noStartSpace: false,
-		autoplay: 0,
-	},
-}
+import getConfig from "./src/getConfig"
+import getNodes from "./src/getNodes"
+import events from "./src/events"
 
 class Plugin {
 	constructor(el, settings) {
 		this.el = el
 
-		// data-attribute settings
-		const elSettings = toJson(this.el.getAttribute(ATTR))
+		this.currentSettings = getConfig.call(this, settings)
+		this.nodes = getNodes.call(this)
+		this._templates = {}
 
-		// merged settings
-		this.settings = extend(true, DEFAULT, settings, elSettings)
-
-		// carousel config
-		this.config = this.settings.default
-
-		// media query carousel config
-		if (this.settings.responsive) {
-			// order respinsive widths
-			this.settings.responsive.sort(
-				(a, b) => parseInt(a.minWidth, 10) - parseInt(b.minWidth, 10)
-			)
-
-			this.config = getMqConfig.call(this)
-			this.settings.responsive.forEach((config) => {
-				const mql = window.matchMedia(`(min-width: ${config.minWidth})`)
-				mql.addEventListener("change", onMatchMedia.bind(this))
-			})
-		}
-
-		// pseudo templates
-		this.nodes = {
-			paging: this.el.querySelector(`[${ATTRPAGING}]`),
-			prev: this.el.querySelector(`[${ATTRPREV}]`),
-			next: this.el.querySelector(`[${ATTRNEXT}]`),
-			playstop: this.el.querySelector(`[${ATTRPLAYSTOP}]`),
-		}
-
-		this.stringTpls = {}
-
-		if (this.nodes.paging) {
-			this.stringTpls.pagingBtn = this.nodes.paging.innerHTML
-		}
-
-		// Labels
-		this.texts = {}
+		events.call(this)
 
 		if (this.nodes.playstop) {
-			this.stringTpls.playstop = this.nodes.playstop.innerHTML
 			const playstopTexts = this.nodes.playstop
 				.getAttribute(ATTRPLAYSTOP)
 				.split("|")
 
-			this.texts = {
-				...this.texts,
-				play: playstopTexts[0],
-				stop: playstopTexts[1],
+			this._templates.playstop = {
+				tpl: this.nodes.playstop.innerHTML,
+				playLabel: playstopTexts[0],
+				stopLabel: playstopTexts[1],
 			}
 		}
 
-		if (this.nodes.prev && this.nodes.next) {
-			this.stringTpls.prev = this.nodes.prev.innerHTML
-			this.stringTpls.next = this.nodes.next.innerHTML
-			const prevTexts = this.nodes.prev.getAttribute(ATTRPREV).split("|")
-			const nextTexts = this.nodes.next.getAttribute(ATTRNEXT).split("|")
+		if (this.nodes.prev) {
+			const prevLabels = this.nodes.prev.getAttribute(ATTRPREV).split("|")
 
-			this.texts = {
-				...this.texts,
-				prev: prevTexts[0],
-				prevFirst: prevTexts[1],
-				next: nextTexts[0],
-				nextLast: nextTexts[1],
+			this._templates.prev = {
+				tpl: this.nodes.prev.innerHTML,
+				label: prevLabels[0],
+				lastLabel: prevLabels[1],
 			}
 		}
 
-		if (!this.config.disable) {
+		if (this.nodes.next) {
+			const nextLabels = this.nodes.next.getAttribute(ATTRNEXT).split("|")
+
+			this._templates.next = {
+				tpl: this.nodes.next.innerHTML,
+				label: nextLabels[0],
+				lastLabel: nextLabels[1],
+			}
+		}
+
+		if (!this.currentSettings.disable) {
 			init.call(this)
 		}
 	}
 
 	play() {
 		// "stop" status !== pause
-		if (!this.nodes.playstop || this.autoplayStatus === "stop") return
+		if (!this.nodes.playstop || this.autoplayStatus === "stop") {
+			return
+		}
 
 		this.pause() // clear interval
+
+		// can't autoplay without loop
+		this.currentSettings.loop = true
 		this.autoplayStatus = "play"
 		this.nodes.playstop.classList.add("is-playing")
 
-		const playText = this.stringTpls.playstop
-		this.nodes.playstop.innerHTML = playText.replace("{text}", this.texts.play)
+		this.nodes.playstop.innerHTML = this._templates.playstop.tpl.replace(
+			"{text}",
+			this._templates.playstop.playLabel
+		)
 
-		let newActive = this.active
+		let newActive = this.activePage
 		this._interval = window.setInterval(() => {
 			newActive++
 
 			// must loop even with loop: false
-			if (newActive > this.slideLength - 1) {
+			if (newActive > this.pagesLength - 1) {
 				newActive = 0
 			}
 
 			this.changeActive(newActive)
-		}, this.config.autoplay)
+		}, this.currentSettings.autoplay)
 	}
 
 	pause() {
@@ -135,8 +101,10 @@ class Plugin {
 		this.autoplayStatus = "stop"
 		this.nodes.playstop.classList.remove("is-playing")
 
-		const stopText = this.stringTpls.playstop
-		this.nodes.playstop.innerHTML = stopText.replace("{text}", this.texts.stop)
+		this.nodes.playstop.innerHTML = this._templates.playstop.tpl.replace(
+			"{text}",
+			this._templates.playstop.stopLabel
+		)
 		window.clearInterval(this._interval)
 	}
 
@@ -152,20 +120,24 @@ class Plugin {
 	}
 
 	changeActive(newActive, isSwipe) {
-		this.active = newActive
+		this.activePage = newActive
 
-		if (this.active < 0) {
-			this.active = this.config.loop && !isSwipe ? this.slideLength - 1 : 0
+		if (this.activePage < 0) {
+			this.activePage =
+				this.currentSettings.loop && !isSwipe ? this.pagesLength - 1 : 0
 		}
 
-		if (this.active > this.slideLength - 1) {
-			this.active = this.config.loop && !isSwipe ? 0 : this.slideLength - 1
+		if (this.activePage > this.pagesLength - 1) {
+			this.activePage =
+				this.currentSettings.loop && !isSwipe ? 0 : this.pagesLength - 1
 		}
 
 		setActive.call(this)
 	}
 
 	reinit() {
+		this.disable()
+		this.nodes.items = [].slice.call(this.el.querySelectorAll(`[${ATTRITEM}]`))
 		init.call(this)
 	}
 
@@ -189,7 +161,7 @@ class Plugin {
 		this.nodes.wrapper.removeAttribute("style")
 
 		this.nodes.items.forEach((nodes) => {
-			nodes.forEach((node) => {
+			nodes?.forEach((node) => {
 				node.removeAttribute("tabindex")
 				node.removeAttribute("aria-hidden")
 				node.removeAttribute("style")

@@ -4,7 +4,7 @@ import prevBtn from "./prevBtn"
 import nextBtn from "./nextBtn"
 
 function setActive() {
-	this.activeSlides = []
+	this.visibleSlides = []
 
 	// Le nbr de page est différent du nbr de slides !
 	if (this.nodes.paging) {
@@ -18,7 +18,7 @@ function setActive() {
 				pageBtn = btnNode
 			}
 
-			if (index === this.active) {
+			if (index === this.activePage) {
 				pageBtn.setAttribute("aria-current", "true")
 				node.classList.add(ACTIVECLASS)
 			} else {
@@ -30,13 +30,13 @@ function setActive() {
 
 	this.nodes.items.forEach((nodes, index) => {
 		nodes.forEach((node, indexFirstItem) => {
-			if (index === this.active) {
+			if (index === this.activePage) {
 				// put focus on 1st item from active slide
 				if (indexFirstItem === 0 && this.autoplayStatus !== "play") {
 					node.focus({ preventScroll: true })
 				}
 				node.setAttribute("aria-hidden", "false")
-				this.activeSlides.push(node)
+				this.visibleSlides.push(node)
 			} else {
 				node.setAttribute("aria-hidden", "true")
 			}

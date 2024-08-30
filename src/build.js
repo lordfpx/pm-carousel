@@ -5,19 +5,22 @@ const buildActions = {
 		if (!this.nodes.playstop) return
 
 		// play/stop
-		this.nodes.playstop.hidden = !this.config.autoplay
+		this.nodes.playstop.hidden = !this.currentSettings.autoplay
 	},
 
-	wrappers: function () {
-		const startSpace = this.config.noStartSpace ? 0 : this.config.spaceAround
+	wrapper: function () {
+		const startSpace = this.currentSettings.noStartSpace
+			? 0
+			: this.currentSettings.spaceAround
 
 		// overflow container display
 		this.nodes.overflow.style.transform = `translateX(${
-			this.active * -100 + startSpace
+			this.activePage * -100 + startSpace
 		}%)`
 
-		if (this.config.noStartSpace) {
-			this.nodes.overflow.style.paddingRight = this.config.spaceAround + "%"
+		if (this.currentSettings.noStartSpace) {
+			this.nodes.overflow.style.paddingRight =
+				this.currentSettings.spaceAround + "%"
 		} else {
 			this.nodes.overflow.style.paddingRight = startSpace + "%"
 			this.nodes.overflow.style.paddingLeft = startSpace + "%"
@@ -41,17 +44,17 @@ const buildActions = {
 		this.nodes.items.forEach((node, index) => {
 			node.setAttribute("tabindex", "-1")
 			node.setAttribute(ATTR + "-item", index)
-			node.style.flex = `1 0 ${100 / this.config.group}%`
+			node.style.flex = `1 0 ${100 / this.currentSettings.group}%`
 			node.style.overflow = "hidden"
 		})
 
 		// split in groups
 		while (this.nodes.items.length > 0) {
-			newSlides.push(this.nodes.items.splice(0, this.config.group))
+			newSlides.push(this.nodes.items.splice(0, this.currentSettings.group))
 		}
 
 		this.nodes.items = newSlides
-		this.slideLength = this.nodes.items.length
+		this.pagesLength = this.nodes.items.length
 	},
 
 	paging: function () {
@@ -64,7 +67,7 @@ const buildActions = {
 		this.nodes.pages = []
 
 		this.nodes.items.forEach((node, index) => {
-			btnString = this.stringTpls.pagingBtn
+			btnString = this.nodes.pagingTpl.innerHTML
 			newPage = document.createElement("div")
 			newPage.innerHTML = btnString.replace("{nbr}", ++index)
 			this.nodes.pages.push(newPage.firstElementChild)
@@ -76,8 +79,9 @@ const buildActions = {
 	},
 }
 
-function build(actions = []) {
-	actions.forEach((action) => buildActions[action].call(this))
+function build() {
+	const elements = ["slides", "wrapper", "playstop", "paging"]
+	elements.forEach((action) => buildActions[action].call(this))
 }
 
 export default build

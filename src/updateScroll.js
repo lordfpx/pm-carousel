@@ -1,13 +1,15 @@
 export function updateScroll() {
-	this._slideWidth = this.activeSlides[0].offsetWidth * this.config.group
-	this._distance = this.active * this._slideWidth
+	this._metrics.slideWidth =
+		this.visibleSlides[0].offsetWidth * this.currentSettings.group
+	this._metrics.distance = this.activePage * this._metrics.slideWidth
 
 	// dernière slide
-	if (this.active === this.slideLength - 1) {
-		this._distance = this.nodes.overflow.scrollWidth - this._slideWidth
+	if (this.activePage === this.pagesLength - 1) {
+		this._metrics.distance =
+			this.nodes.overflow.scrollWidth - this._metrics.slideWidth
 
-		if (this.config.spaceAround) {
-			this._distance -= parseInt(
+		if (this.currentSettings.spaceAround) {
+			this._metrics.distance -= parseInt(
 				window
 					.getComputedStyle(this.nodes.overflow)
 					.getPropertyValue("padding-right"),
@@ -16,7 +18,8 @@ export function updateScroll() {
 		}
 	}
 
-	this.nodes.overflow.style.transform = `translateX(${-this._distance}px`
+	this.nodes.overflow.style.transform = `translateX(${-this._metrics
+		.distance}px`
 }
 
 export default updateScroll

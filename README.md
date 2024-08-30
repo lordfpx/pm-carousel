@@ -6,12 +6,13 @@ Examples here: [https://lordfpx.github.io/pm-carousel/](https://lordfpx.github.i
 
 ## Features
 
-- Fully accessible if you respect the HTML markup
+- Fully accessible (if you respect HTML order)
 - Keyboard navigation (keyboard arrows, Home and End keys)
-- touch swipe
-- responsive carousel settings
-- no dependencies
+- Touch swipe
+- Responsive carousel settings
+- No dependencies
 - Vanilla JS
+- Pretty small (about 3.5Kb gzip)
 
 ## HTML markup
 
@@ -233,7 +234,7 @@ The `disable` setting will deactivate the carousel.
 
 The instance of `pm-carousel` can be reached from nodes with `data-pm-carousel` attribute.
 
-### Pay and Stop
+### Play and Stop
 
 Only available when Play/PAuse button is present.
 

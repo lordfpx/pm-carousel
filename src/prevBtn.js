@@ -1,15 +1,16 @@
 function prevBtn() {
 	if (!this.nodes.prev) return
 
-	const prevText = this.stringTpls.prev
-	this.nodes.prev.innerHTML = prevText.replace(
+	this.nodes.prev.innerHTML = this._templates.prev.tpl.replace(
 		"{text}",
-		this.active === 0 ? this.texts.prevFirst : this.texts.prev
+		this.activePage === 0
+			? this._templates.prev.lastLabel
+			: this._templates.prev.label
 	)
 
-	this.config.loop
+	this.currentSettings.loop
 		? (this.nodes.prev.hidden = false)
-		: (this.nodes.prev.hidden = this.active === 0)
+		: (this.nodes.prev.hidden = this.activePage === 0)
 }
 
 export default prevBtn

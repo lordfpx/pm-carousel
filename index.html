@@ -39,8 +39,7 @@
 					<xmp
 >
 const demo1 = document.querySelector("#demo1")
-
-pmCarousel({}, demo1);
+pmCarousel({}, demo1)
           </xmp>
 
 					<div id="demo1" data-pm-carousel>
@@ -101,6 +100,19 @@ pmCarousel({}, demo1);
 
 					<h2 class="dark-pink">With Pause/Play button</h2>
 
+					<xmp
+>
+const demo2 = document.querySelector("#demo2")
+pmCarousel(
+	{
+		default: {
+			autoplay: 3000,
+		},
+	},
+	demo2
+)
+          </xmp>
+
 					<div id="demo2" data-pm-carousel>
 						<button
 							type="button"
@@ -137,6 +149,12 @@ pmCarousel({}, demo1);
 					</div>
 
 					<h2 class="dark-pink">With Previous/Next buttons</h2>
+
+					<xmp
+>
+const demo3 = document.querySelector("#demo3")
+pmCarousel({}, demo3)
+          </xmp>
 
 					<div id="demo3" data-pm-carousel>
 						<div data-pm-carousel-wrapper>
@@ -180,7 +198,70 @@ pmCarousel({}, demo1);
 						</button>
 					</div>
 
+					<h2 class="dark-pink">With Previous/Next buttons but no loop</h2>
+
+					<xmp
+>
+const demo3NoLoop = document.querySelector("#demo3-noloop")
+pmCarousel(
+	{
+		default: {
+			loop: false,
+		},
+	},
+	demo3NoLoop
+)
+          </xmp>
+
+					<div id="demo3-noloop" data-pm-carousel>
+						<div data-pm-carousel-wrapper>
+							<div data-pm-carousel-overflow>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 1</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 2</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Beauty news</h2>
+									<p>Content of panel 3</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fashion news</h2>
+									<p>Content of panel 4</p>
+								</div>
+								<div data-pm-carousel-item>
+									<h2>Fragrance news</h2>
+									<p>Content of panel 5</p>
+								</div>
+							</div>
+						</div>
+
+						<button
+							data-pm-carousel-prev="Previous item|Go back to last item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+						<button
+							data-pm-carousel-next="Next item|Go back to first item"
+							type="button"
+							hidden
+						>
+							<b>{text}</b>
+						</button>
+					</div>
+
 					<h2 class="dark-pink">With pagination</h2>
+
+					<xmp
+>
+const demo4 = document.querySelector("#demo4")
+pmCarousel({}, demo4)
+          </xmp>
 
 					<div id="demo4" data-pm-carousel>
 						<div data-pm-carousel-wrapper>
@@ -216,6 +297,12 @@ pmCarousel({}, demo1);
 					</div>
 
 					<h2 class="dark-pink">With pagination and Previous/Next buttons</h2>
+
+					<xmp
+>
+const demo5 = document.querySelector("#demo5")
+pmCarousel({}, demo5)
+          </xmp>
 
 					<div id="demo5" data-pm-carousel>
 						<div data-pm-carousel-wrapper>
@@ -268,6 +355,12 @@ pmCarousel({}, demo1);
 					<h2 class="dark-pink">
 						With passive pagination indicator and Previous/Next buttons
 					</h2>
+
+					<xmp
+>
+const demo6 = document.querySelector("#demo6")
+pmCarousel({}, demo6)
+          </xmp>
 
 					<div id="demo6" data-pm-carousel>
 						<ul data-pm-carousel-paging hidden>
@@ -323,26 +416,29 @@ pmCarousel({}, demo1);
 >
 const demo7 = document.querySelector("#demo7")
 
-pmCarousel({
-  default: {
-    group: 1,
-  },
-  responsive: [
-    {
-      minWidth: "400px",
-      group: 2,
-    },
-    {
-      minWidth: "600px",
-      disable: true,
-    },
-    {
-      minWidth: "800px",
-      group: 3,
-      autoplay: 4000,
-    },
-  ]
-}, demo7);
+pmCarousel(
+	{
+		default: {
+			group: 1,
+		},
+		responsive: [
+			{
+				minWidth: "800px",
+				group: 3,
+				autoplay: 4000,
+			},
+			{
+				minWidth: "400px",
+				group: 2,
+			},
+			{
+				minWidth: "600px",
+				disable: true,
+			},
+		],
+	},
+	demo7
+)
           </xmp>
 
 					<div id="demo7" data-pm-carousel>
