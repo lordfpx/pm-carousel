@@ -2,6 +2,10 @@ import { ACTIVECLASS } from "./constants"
 import updateScroll from "./updateScroll"
 import prevBtn from "./prevBtn"
 import nextBtn from "./nextBtn"
+import {
+	disableKeyboardNavigation,
+	enableKeyboardNavigation,
+} from "./manageFocus"
 
 function setActive() {
 	this.visibleSlides = []
@@ -31,14 +35,30 @@ function setActive() {
 	this.nodes.items.forEach((nodes, index) => {
 		nodes.forEach((node, indexFirstItem) => {
 			if (index === this.activePage) {
-				// put focus on 1st item from active slide
-				if (indexFirstItem === 0 && this.autoplayStatus !== "play") {
-					node.focus({ preventScroll: true })
+				node.removeAttribute("aria-hidden")
+
+				if (this.supportsInert) {
+					node.inert = false
+				} else {
+					enableKeyboardNavigation(node)
 				}
-				node.setAttribute("aria-hidden", "false")
+
 				this.visibleSlides.push(node)
+
+				// put focus on 1st item from active slide
+				setTimeout(() => {
+					if (indexFirstItem === 0 && this.autoplayStatus !== "play") {
+						node.focus({ preventScroll: true })
+					}
+				}, 0)
 			} else {
 				node.setAttribute("aria-hidden", "true")
+
+				if (this.supportsInert) {
+					node.inert = true
+				} else {
+					disableKeyboardNavigation(node)
+				}
 			}
 		})
 	})

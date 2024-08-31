@@ -13,6 +13,12 @@ import getConfig from "./src/getConfig"
 import getNodes from "./src/getNodes"
 import events from "./src/events"
 
+function supportsInert() {
+	const testElement = document.createElement("div")
+	testElement.setAttribute("inert", "")
+	return testElement.inert === true
+}
+
 class Plugin {
 	constructor(el, settings) {
 		this.el = el
@@ -20,6 +26,7 @@ class Plugin {
 		this.currentSettings = getConfig.call(this, settings)
 		this.nodes = getNodes.call(this)
 		this._templates = {}
+		this.supportsInert = supportsInert()
 
 		events.call(this)
 
