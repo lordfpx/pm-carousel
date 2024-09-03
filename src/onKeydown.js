@@ -1,28 +1,18 @@
-function onKeydown(ev) {
-	let prevDef = false
-
-	switch (ev.key) {
-		case "ArrowUp":
-		case "ArrowLeft":
-			prevDef = true
-			this.changeActive(this.activePage - 1)
-			break
-		case "ArrowDown":
-		case "ArrowRight":
-			prevDef = true
-			this.changeActive(this.activePage + 1)
-			break
-		case "Home":
-			prevDef = true
-			this.changeActive(0)
-			break
-		case "End":
-			prevDef = true
-			this.changeActive(this.pagesLength - 1)
-			break
+function onKeydown(event) {
+	const keyActions = {
+		ArrowUp: () => this.changeActive(this.activePage - 1),
+		ArrowLeft: () => this.changeActive(this.activePage - 1),
+		ArrowDown: () => this.changeActive(this.activePage + 1),
+		ArrowRight: () => this.changeActive(this.activePage + 1),
+		Home: () => this.changeActive(0),
+		End: () => this.changeActive(this.pagesLength - 1),
 	}
 
-	prevDef && ev.preventDefault()
+	const action = keyActions[event.key]
+	if (action) {
+		action()
+		event.preventDefault()
+	}
 }
 
 export default onKeydown

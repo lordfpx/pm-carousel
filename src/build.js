@@ -66,8 +66,8 @@ const buildActions = {
 		this.nodes.paging.innerHTML = ""
 		this.nodes.pages = []
 
-		this.nodes.items.forEach((node, index) => {
-			btnString = this.nodes.pagingTpl.innerHTML
+		this.nodes.items.forEach((_node, index) => {
+			btnString = this._templates.pagingTpl
 			newPage = document.createElement("div")
 			newPage.innerHTML = btnString.replace("{nbr}", ++index)
 			this.nodes.pages.push(newPage.firstElementChild)

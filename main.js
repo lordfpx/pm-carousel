@@ -1,66 +1,30 @@
-import {
-	ATTR,
-	ACTIVECLASS,
-	ATTRITEM,
-	ATTRPREV,
-	ATTRNEXT,
-	ATTRPLAYSTOP,
-} from "./src/constants"
+import { ATTR, ACTIVECLASS, ATTRITEM } from "./src/constants"
 
 import init from "./src/init"
 import setActive from "./src/setActive"
 import getConfig from "./src/getConfig"
 import getNodes from "./src/getNodes"
-import events from "./src/events"
+import getTemplates from "./src/getTemplates"
+import { addEvents, removeEvents } from "./src/events"
 
-function supportsInert() {
+// test `inert` support
+const supportsInert = (() => {
 	const testElement = document.createElement("div")
 	testElement.setAttribute("inert", "")
 	return testElement.inert === true
-}
+})()
 
 class Plugin {
 	constructor(el, settings) {
 		this.el = el
+		this.supportsInert = supportsInert
 
 		this.currentSettings = getConfig.call(this, settings)
+
 		this.nodes = getNodes.call(this)
-		this._templates = {}
-		this.supportsInert = supportsInert()
+		this._templates = getTemplates.call(this)
 
-		events.call(this)
-
-		if (this.nodes.playstop) {
-			const playstopTexts = this.nodes.playstop
-				.getAttribute(ATTRPLAYSTOP)
-				.split("|")
-
-			this._templates.playstop = {
-				tpl: this.nodes.playstop.innerHTML,
-				playLabel: playstopTexts[0],
-				stopLabel: playstopTexts[1],
-			}
-		}
-
-		if (this.nodes.prev) {
-			const prevLabels = this.nodes.prev.getAttribute(ATTRPREV).split("|")
-
-			this._templates.prev = {
-				tpl: this.nodes.prev.innerHTML,
-				label: prevLabels[0],
-				lastLabel: prevLabels[1],
-			}
-		}
-
-		if (this.nodes.next) {
-			const nextLabels = this.nodes.next.getAttribute(ATTRNEXT).split("|")
-
-			this._templates.next = {
-				tpl: this.nodes.next.innerHTML,
-				label: nextLabels[0],
-				lastLabel: nextLabels[1],
-			}
-		}
+		addEvents.call(this)
 
 		if (!this.currentSettings.disable) {
 			init.call(this)
@@ -144,20 +108,13 @@ class Plugin {
 
 	reinit() {
 		this.disable()
-		this.nodes.items = [].slice.call(this.el.querySelectorAll(`[${ATTRITEM}]`))
+		this.nodes.items = [...this.el.querySelectorAll(`[${ATTRITEM}]`)]
 		init.call(this)
 	}
 
 	disable() {
 		this.stop()
-
-		this.nodes.wrapper.removeEventListener("touchstart", this.onTouchStart)
-		this.nodes.wrapper.removeEventListener("touchmove", this.onTouchMove)
-		this.nodes.wrapper.removeEventListener("touchend", this.onTouchEnd)
-		this.el.removeEventListener("click", this.onClick)
-		this.el.removeEventListener("keydown", this.onKeydown)
-		this.el.removeEventListener("mouseenter", this.onMouseEnter)
-		this.el.removeEventListener("mouseleave", this.onMouseLeave)
+		removeEvents.call(this)
 
 		this.nodes.paging.hidden = true
 		this.nodes.prev.hidden = true
@@ -185,14 +142,12 @@ const initPmCarousel = (node, settings) => {
 	}
 }
 
-const pmCarousel = function (settings = {}, node) {
-	if (node === null) return
+const pmCarousel = function (settings = {}, nodes) {
+	if (!nodes) return
 
-	node = node || document.querySelectorAll(`[${ATTR}]`)
+	nodes = nodes instanceof NodeList ? [...nodes] : [nodes]
 
-	node.length
-		? node.forEach((node) => initPmCarousel(node, settings))
-		: initPmCarousel(node, settings)
+	nodes.forEach((node) => initPmCarousel(node, settings))
 }
 
 window.pmCarousel = pmCarousel

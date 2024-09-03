@@ -1,7 +1,7 @@
 @import "./node_modules/tachyons/css/tachyons.css";
 
 /*
-Styles only for demo purpose
+Styles for demo purpose only
 */
 
 * {
@@ -14,10 +14,16 @@ body {
 
 [data-pm-carousel-item] {
 	border: 1px solid grey;
+	transition: opacity 0.3s ease-in-out;
+	padding: 10px;
 }
 
 [data-pm-carousel-item]:focus {
 	box-shadow: inset 0 0 0 2px blue;
+}
+
+[data-pm-carousel-item][aria-hidden="true"] {
+	opacity: 0.2;
 }
 
 [aria-current="true"] {

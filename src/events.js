@@ -3,32 +3,32 @@ import onKeydown from "./onKeydown"
 import { onTouchStart, onTouchMove, onTouchEnd } from "./onTouch"
 import { ATTRPLAYSTOP } from "./constants"
 
-function events() {
-	// events functions
-	const handleClick = onClick.bind(this)
-	const handleTouchStart = onTouchStart.bind(this)
-	const handleTouchMove = onTouchMove.bind(this)
-	const handleTouchEnd = onTouchEnd.bind(this)
-	const handleKeydown = onKeydown.bind(this)
-	const handleMouseEnter = this.pause.bind(this)
-	const handleMouseLeave = this.play.bind(this)
-	const handleFocusIn = function (event) {
-		// not when on play/stop button
+function manageEvents(add = true) {
+	const method = add ? "addEventListener" : "removeEventListener"
+
+	const handleFocusIn = (event) => {
 		!event.target.closest(`[${ATTRPLAYSTOP}]`) ? this.pause() : this.play()
 	}
-	const handleFocusOut = this.play.bind(this)
 
-	this.el.addEventListener("click", handleClick)
-	this.el.addEventListener("keydown", handleKeydown)
-	this.el.addEventListener("focusin", handleFocusIn.bind(this))
-	this.el.addEventListener("focusout", handleFocusOut.bind(this))
+	// Touch event on the wrapper
+	;["touchstart", "touchmove", "touchend"].forEach((event, index) => {
+		const handler = [onTouchStart, onTouchMove, onTouchEnd][index]
+		this.nodes.wrapper[method](event, handler.bind(this))
+	})
 
-	this.nodes.wrapper.addEventListener("touchstart", handleTouchStart)
-	this.nodes.wrapper.addEventListener("touchmove", handleTouchMove)
-	this.nodes.wrapper.addEventListener("touchend", handleTouchEnd)
-
-	this.el.addEventListener("mouseenter", handleMouseEnter)
-	this.el.addEventListener("mouseleave", handleMouseLeave)
+	// Events on the component
+	this.el[method]("click", onClick.bind(this))
+	this.el[method]("keydown", onKeydown.bind(this))
+	this.el[method]("focusin", handleFocusIn)
+	this.el[method]("focusout", this.play.bind(this))
+	this.el[method]("mouseenter", this.pause.bind(this))
+	this.el[method]("mouseleave", this.play.bind(this))
 }
 
-export default events
+export function addEvents() {
+	manageEvents.call(this, true)
+}
+
+export function removeEvents() {
+	manageEvents.call(this, false)
+}

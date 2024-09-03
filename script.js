@@ -2,7 +2,15 @@ import pmCarousel from "./main"
 
 // Complete example
 const demo1 = document.querySelector("#demo1")
-pmCarousel({}, demo1)
+pmCarousel(
+	{
+		default: {
+			spaceAround: 10,
+			group: 2,
+		},
+	},
+	demo1
+)
 
 // With Pause/Play button
 const demo2 = document.querySelector("#demo2")

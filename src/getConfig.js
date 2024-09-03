@@ -1,8 +1,6 @@
 import { ATTR } from "./constants"
 import { extend } from "./utils/extend"
 import { toJson } from "./utils/toJson"
-import getMqConfig from "./getConfig/getMqConfig"
-import onMatchMedia from "./getConfig/onMatchMedia"
 
 const DEFAULT = {
 	default: {
@@ -14,19 +12,53 @@ const DEFAULT = {
 	},
 }
 
-function getConfig(settings) {
-	// data-attribute settings
+function getConfig(settings = {}) {
+	// get the right config depending on media query
+	const getMqConfig = () => {
+		const updatedMqConfig = this.settings.responsive
+			.slice()
+			.reverse()
+			.find(
+				(mqConfigs) =>
+					window.matchMedia(`(min-width: ${mqConfigs.minWidth})`).matches
+			)
+
+		return updatedMqConfig
+			? { ...this.settings.default, ...updatedMqConfig }
+			: this.settings.default
+	}
+
+	// on media query change
+	let timeout
+	let checkDebounce = false
+
+	const onMatchMedia = () => {
+		if (checkDebounce) return
+
+		checkDebounce = true
+
+		timeout = setTimeout(() => {
+			this.currentSettings = getMqConfig.call(this)
+
+			this.currentSettings.disable ? this.disable() : this.reinit()
+
+			checkDebounce = false
+			clearTimeout(timeout)
+		}, 200)
+	}
+
+	// read all settings from data-attribute
 	const elSettings = toJson(this.el.getAttribute(ATTR))
 
-	// merged settings
-	this.settings = extend(true, DEFAULT, settings, elSettings)
+	// merge settings
+	this.settings = extend(true, {}, DEFAULT, settings, elSettings)
 
-	// carousel config
+	// default settings
 	let config = this.settings.default
 
-	// media query carousel config
+	// if settings has media queries defined
 	if (this.settings.responsive) {
-		// order respinsive widths
+		// sort min width settings
 		this.settings.responsive.sort(
 			(a, b) => parseInt(a.minWidth, 10) - parseInt(b.minWidth, 10)
 		)

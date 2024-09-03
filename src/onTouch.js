@@ -1,15 +1,20 @@
 import { TRANSITION } from "./constants"
 
-let timeoutOnTouchStart
-let timeoutOnTouchMove
-let timeoutOnTouchEnd
+const timeouts = {
+	onTouchStart: null,
+	onTouchMove: null,
+	onTouchEnd: null,
+}
+
+function handleRequestAnimationFrame(type, callback) {
+	if (timeouts[type]) {
+		window.cancelAnimationFrame(timeouts[type])
+	}
+	timeouts[type] = window.requestAnimationFrame(callback)
+}
 
 export function onTouchStart(ev) {
-	if (timeoutOnTouchStart) {
-		window.cancelAnimationFrame(timeoutOnTouchStart)
-	}
-
-	timeoutOnTouchStart = window.requestAnimationFrame(() => {
+	handleRequestAnimationFrame("onTouchStart", () => {
 		// stop autoplay
 		this.stop()
 
@@ -20,11 +25,7 @@ export function onTouchStart(ev) {
 }
 
 export function onTouchMove(ev) {
-	if (timeoutOnTouchMove) {
-		window.cancelAnimationFrame(timeoutOnTouchMove)
-	}
-
-	timeoutOnTouchMove = window.requestAnimationFrame(() => {
+	handleRequestAnimationFrame("onTouchMove", () => {
 		this._metrics.touchmoveX = Math.round(ev.touches[0].pageX)
 		this._metrics.moveX = this._metrics.touchstartX - this._metrics.touchmoveX
 
@@ -35,11 +36,7 @@ export function onTouchMove(ev) {
 }
 
 export function onTouchEnd() {
-	if (timeoutOnTouchEnd) {
-		window.cancelAnimationFrame(timeoutOnTouchEnd)
-	}
-
-	timeoutOnTouchEnd = window.requestAnimationFrame(() => {
+	handleRequestAnimationFrame("onTouchEnd", () => {
 		let newActive = this.activePage
 
 		this.nodes.overflow.style.transition = TRANSITION

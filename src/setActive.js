@@ -1,7 +1,6 @@
 import { ACTIVECLASS } from "./constants"
 import updateScroll from "./updateScroll"
-import prevBtn from "./prevBtn"
-import nextBtn from "./nextBtn"
+import updateNavBtns from "./updateNavBtns"
 import {
 	disableKeyboardNavigation,
 	enableKeyboardNavigation,
@@ -10,17 +9,10 @@ import {
 function setActive() {
 	this.visibleSlides = []
 
-	// Le nbr de page est différent du nbr de slides !
+	// update paging buttons
 	if (this.nodes.paging) {
 		this.nodes.pages.forEach((node, index) => {
-			let pageBtn = node
-
-			// button child
-			const btnNode = node.querySelector("button")
-
-			if (btnNode) {
-				pageBtn = btnNode
-			}
+			let pageBtn = node.querySelector("button") || node
 
 			if (index === this.activePage) {
 				pageBtn.setAttribute("aria-current", "true")
@@ -32,9 +24,12 @@ function setActive() {
 		})
 	}
 
+	// update items in slides
 	this.nodes.items.forEach((nodes, index) => {
 		nodes.forEach((node, indexFirstItem) => {
-			if (index === this.activePage) {
+			const isActiveSlide = index === this.activePage
+
+			if (isActiveSlide) {
 				node.removeAttribute("aria-hidden")
 
 				if (this.supportsInert) {
@@ -45,12 +40,10 @@ function setActive() {
 
 				this.visibleSlides.push(node)
 
-				// put focus on 1st item from active slide
-				setTimeout(() => {
-					if (indexFirstItem === 0 && this.autoplayStatus !== "play") {
-						node.focus({ preventScroll: true })
-					}
-				}, 0)
+				// put focus on the 1st item from the active slide if autoplay is not playing
+				if (indexFirstItem === 0 && this.autoplayStatus !== "play") {
+					node.focus({ preventScroll: true })
+				}
 			} else {
 				node.setAttribute("aria-hidden", "true")
 
@@ -63,9 +56,9 @@ function setActive() {
 		})
 	})
 
+	// update scroll and prev/next buttons
 	updateScroll.call(this)
-	prevBtn.call(this)
-	nextBtn.call(this)
+	updateNavBtns.call(this)
 }
 
 export default setActive
