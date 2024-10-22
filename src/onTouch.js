@@ -26,8 +26,8 @@ export function onTouchStart(ev) {
 
 export function onTouchMove(ev) {
 	handleRequestAnimationFrame("onTouchMove", () => {
-		this._metrics.touchmoveX = Math.round(ev.touches[0].pageX)
-		this._metrics.moveX = this._metrics.touchstartX - this._metrics.touchmoveX
+		this._metrics.moveX =
+			this._metrics.touchstartX - Math.round(ev.touches[0].pageX)
 
 		this.nodes.overflow.style.transform = `translateX(${
 			-this._metrics.distance - this._metrics.moveX
@@ -37,20 +37,23 @@ export function onTouchMove(ev) {
 
 export function onTouchEnd() {
 	handleRequestAnimationFrame("onTouchEnd", () => {
-		let newActive = this.activePage
+		const goToNext = this._metrics.moveX > this._metrics.slideWidth / 3
+		const goToPrev = this._metrics.moveX < -this._metrics.slideWidth / 3
 
 		this.nodes.overflow.style.transition = TRANSITION
+		let newActive = this.activePage
 
-		if (this._metrics.moveX > this._metrics.slideWidth / 3) {
-			newActive++
-		} else if (this._metrics.moveX < -this._metrics.slideWidth / 3) {
-			newActive--
-		} else {
+		// réinit moving distance
+		this._metrics.moveX = 0
+
+		if (!goToNext && !goToPrev) {
 			// reset to initial position
 			this.nodes.overflow.style.transform = `translateX(${-this._metrics
 				.distance}px)`
 			return
 		}
+
+		goToNext ? (newActive += 1) : (newActive -= 1)
 
 		this.changeActive(newActive, true)
 	})

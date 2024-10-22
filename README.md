@@ -16,7 +16,9 @@ Examples here: [https://lordfpx.github.io/pm-carousel/](https://lordfpx.github.i
 
 ## HTML markup
 
-The HTML order is very important to be fully accessible. Full HTML example to use `pm-carousel`:
+The HTML order is very important to be fully accessible. You will notice strings like `{text}` or `{nbr}`. They are mandatory and will be replaced by the script.
+
+Full HTML example to use `pm-carousel`:
 
 ```html
 <div data-pm-carousel>
@@ -57,65 +59,67 @@ The HTML order is very important to be fully accessible. Full HTML example to us
 </div>
 ```
 
-- **Play and Stop button (optional)**
+### Play and Stop button (optional)
 
-  ```html
-  <button
-  	type="button"
-  	data-pm-carousel-playstop="Stop the carousel|Play the carousel"
-  	hidden
-  >
-  	{text}
-  </button>
-  ```
+This is the most basic button example. You can **add** any HTML markup that will not break this base. `{text}` will be replaced by the right value defined inside the `data-pm-carousel-playstop` attribute.
 
-- **Paging (optional)**
+```html
+<button
+	type="button"
+	data-pm-carousel-playstop="Stop the carousel|Play the carousel"
+	hidden
+>
+	{text}
+</button>
+```
 
-  The HTML inside the button can be freely personalized (**{nbr}** is mandatory).
+### Paging (optional)
 
-  ```html
-  <ul data-pm-carousel-paging hidden>
-  	<li>
-  		<button type="button">Slide {nbr}</button>
-  	</li>
-  </ul>
-  ```
+The HTML inside the button can be freely personalized. `{nbr}` is mandatory and will be replaced by the slide number.
 
-- **The carousel**
+```html
+<ul data-pm-carousel-paging hidden>
+	<li>
+		<button type="button">Slide {nbr}</button>
+	</li>
+</ul>
+```
 
-  ```html
-  <div data-pm-carousel-wrapper>
-  	<div data-pm-carousel-overflow>
-  		<div data-pm-carousel-item>...</div>
-  		<div data-pm-carousel-item>...</div>
-  		<div data-pm-carousel-item>...</div>
-  	</div>
-  </div>
-  ```
+### The slides
 
-- **Previous and next buttons**
+```html
+<div data-pm-carousel-wrapper>
+	<div data-pm-carousel-overflow>
+		<div data-pm-carousel-item>...</div>
+		<div data-pm-carousel-item>...</div>
+		<div data-pm-carousel-item>...</div>
+	</div>
+</div>
+```
 
-  The HTML inside the buttons can be freely personalized (**{nbr}** is mandatory).
+### Previous and next buttons
 
-  Labels inside `data-pm-carousel-prev` and `data-pm-carousel-next` attributes are used to dynamize the buttons.
+This is the most basic button example. You can **add** any HTML markup that will not break this base.
 
-  ```html
-  <button
-  	data-pm-carousel-prev="Previous item|Go back to last item"
-  	type="button"
-  	hidden
-  >
-  	{text}
-  </button>
+Labels inside `data-pm-carousel-prev` and `data-pm-carousel-next` attributes are used to dynamize `{text}`.
 
-  <button
-  	data-pm-carousel-next="Next item|Go back to first item"
-  	type="button"
-  	hidden
-  >
-  	{text}
-  </button>
-  ```
+```html
+<button
+	data-pm-carousel-prev="Previous item|Go back to last item"
+	type="button"
+	hidden
+>
+	{text}
+</button>
+
+<button
+	data-pm-carousel-next="Next item|Go back to first item"
+	type="button"
+	hidden
+>
+	{text}
+</button>
+```
 
 ## Settings
 
