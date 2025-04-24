@@ -41,7 +41,11 @@ function setActive() {
 				this.visibleSlides.push(node)
 
 				// put focus on the 1st item from the active slide if autoplay is not playing
-				if (indexFirstItem === 0 && this.autoplayStatus !== "play") {
+				if (
+					indexFirstItem === 0 &&
+					this.autoplayStatus !== "play" &&
+					this.el.contains(document.activeElement)
+				) {
 					node.focus({ preventScroll: true })
 				}
 			} else {
