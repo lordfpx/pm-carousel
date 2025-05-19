@@ -132,6 +132,7 @@ Default settings:
   spaceAround: 0,      // centered mode with partial view of surrounding slides (express in %)
   noStartSpace: false, // in combinaison with "spaceAround" option, but align left the carousel
   autoplay: 0,         // speed of the autoplay (0 for disabled)
+  fullScroll: false,   // Enables full scroll on the last slide to display only the remaining items
 }
 ```
 

@@ -7,4 +7,6 @@ export const ATTRPREV = `${ATTR}-prev`
 export const ATTRNEXT = `${ATTR}-next`
 export const ATTRPLAYSTOP = `${ATTR}-playstop`
 export const TRANSITION = "transform .5s ease-in-out"
+export const TRANSITION_SWIPE = "transform .2s ease-out"
 export const ACTIVECLASS = "is-active"
+export const SLIDE_MIN_RATIO = 6

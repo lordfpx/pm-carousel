@@ -9,6 +9,8 @@ const DEFAULT = {
 		spaceAround: 0,
 		noStartSpace: false,
 		autoplay: 0,
+		allowIncompleteLastPage: false,
+		fullScroll: false,
 	},
 }
 
